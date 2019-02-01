@@ -1,0 +1,71 @@
+library(tidyverse)
+library(rvest)
+
+url <- "https://www.portalinmobiliario.com/venta/departamento/providencia-metropolitana?tp=2&op=1&ca=2&ts=1&dd=0&dh=6&bd=0&bh=6&or=&mn=2&sf=1&sp=1"
+
+html <- read_html(url)
+
+items <- html_nodes(html, ".product-item")
+
+urls <- items %>% 
+  map(html_node, "a") %>% 
+  map(html_attr, "href") %>% 
+  unlist()
+
+get_item_info <- function(url_item) {
+  
+  # url_item <- "/venta/departamento/providencia-metropolitana/4244299-ramon-sotomayor-valdes-2967-departamento-63-uda?tp=2&op=1&iug=323&ca=2&ts=1&mn=2&or=&sf=1&sp=1&at=0&i=24"
+  url_item <- file.path("https://www.portalinmobiliario.com", url_item)
+  html_item <- read_html(url_item)
+  
+  nodes <- c(".media-block-title", ".price", ".price-ref")
+  
+  b1 <- nodes %>% 
+    map(html_node, x = html_item) %>% 
+    map(html_text) 
+  
+  b2 <- html_item %>% 
+    html_node(".property-data-sheet") %>% 
+    html_nodes("p") %>% 
+    html_text() 
+  
+  data_item <- c(b1, b2) %>% 
+    str_trim() %>% 
+    t() %>% 
+    as_data_frame()
+  
+  data_item <- data_item %>% 
+    mutate(
+      lon = html_attr(html_node(html_item, "meta[itemprop=\"longitude\"]"), "content"),
+      lat = html_attr(html_node(html_item, "meta[itemprop=\"latitude\"]"), "content"),
+      url = url_item
+      )
+  
+  data_item
+  
+}
+
+data <- map_df(urls, get_item_info)
+
+data <- data %>% 
+  # mutate_at(vars(V2), readr::parse_number, locale = locale("es", decimal_mark = ",")) %>% 
+  mutate_at(vars(lon, lat), readr::parse_number)
+
+DT::datatable(data)
+
+library(leaflet) 
+library(htmltools)
+
+leaflet(data = data) %>% 
+  addTiles() %>% 
+  addProviderTiles(providers$CartoDB.Positron) %>% 
+  addMarkers(
+    ~lon, 
+    ~lat,
+    # radius = 5,
+    # color = ~pal(V2),
+    clusterOptions = markerClusterOptions(),
+    popup = ~htmlEscape(V3)
+    )
+
+

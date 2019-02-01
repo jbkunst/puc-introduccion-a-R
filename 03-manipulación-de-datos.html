@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Computación estadística con R</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="static/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="static/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="static\css\styles.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section><section id="computacion-estadistica-con-r-manipulacion-de-datos-joshua-kunst-2018" class="titleslide slide level1 center white" data-background="#75AADB"><h1>Computación Estadística con R<br>Manipulación de Datos<br><small>Joshua Kunst, 2018</small></h1></section></section>
+<section><section id="manejo-de-datos" class="titleslide slide level1 center white" data-background="#75AADB"><h1>Manejo de Datos</h1></section><section id="antes-el" class="slide level2">
+<h2>Antes el %&gt;%</h2>
+<p>Ir a RStudio. Yay!</p>
+</section><section id="importar-datos" class="slide level2">
+<h2>Importar datos</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+storms &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/storms.csv&quot;</span>)
+storms</code></pre></div>
+<pre><code>## # A tibble: 6 x 4
+##   storm    wind pressure date      
+##   &lt;chr&gt;   &lt;int&gt;    &lt;int&gt; &lt;date&gt;    
+## 1 Alberto   110     1007 2000-08-03
+## 2 Alex       45     1009 1998-07-27
+## 3 Allison    65     1005 1995-06-03
+## 4 Ana        40     1013 1997-06-30
+## 5 Arlene     50     1010 1999-06-11
+## 6 Arthur     45     1010 1996-06-17</code></pre>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pollution &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/pollution.csv&quot;</span>)
+pollution</code></pre></div>
+<pre><code>## # A tibble: 6 x 3
+##   city     size  amount
+##   &lt;chr&gt;    &lt;chr&gt;  &lt;int&gt;
+## 1 New York large     23
+## 2 New York small     14
+## 3 London   large     22
+## 4 London   small     16
+## 5 Beijing  large    121
+## 6 Beijing  small     56</code></pre>
+</section><section id="filter-seleccionar-filas" class="slide level2">
+<h2><code>filter</code> Seleccionar Filas</h2>
+<p><img src="static/img/dplyr/filter.png" /></p>
+</section><section id="filter-ejemplo" class="slide level2">
+<h2><code>filter</code> Ejemplo</h2>
+<p><img src="static/img/dplyr/filter_example.png" /></p>
+</section><section id="filter-codigo" class="slide level2">
+<h2><code>filter</code> Código</h2>
+<pre><code>filter(storms, storm %in% c(&quot;Alberto&quot;, &quot;Ana&quot;))</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">storms <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(storm <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Alberto&quot;</span>, <span class="st">&quot;Ana&quot;</span>))</code></pre></div>
+<pre><code>## # A tibble: 2 x 4
+##   storm    wind pressure date      
+##   &lt;chr&gt;   &lt;int&gt;    &lt;int&gt; &lt;date&gt;    
+## 1 Alberto   110     1007 2000-08-03
+## 2 Ana        40     1013 1997-06-30</code></pre>
+</section><section id="select-seleccionar-columnas" class="slide level2">
+<h2><code>select</code> Seleccionar Columnas</h2>
+<p><img src="static/img/dplyr/select.png" /></p>
+</section><section id="select-ejemplo" class="slide level2">
+<h2><code>select</code> Ejemplo</h2>
+<p><img src="static/img/dplyr/select_example.png" /></p>
+</section><section id="select-codigo" class="slide level2">
+<h2><code>select</code> Código</h2>
+<pre><code>select(storms, storm, pressure)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">storms <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(storm, pressure)</code></pre></div>
+<pre><code>## # A tibble: 6 x 2
+##   storm   pressure
+##   &lt;chr&gt;      &lt;int&gt;
+## 1 Alberto     1007
+## 2 Alex        1009
+## 3 Allison     1005
+## 4 Ana         1013
+## 5 Arlene      1010
+## 6 Arthur      1010</code></pre>
+</section><section class="slide level2">
+
+<p>Versión alternativa</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">storms <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>wind, <span class="op">-</span>date)</code></pre></div>
+<pre><code>## # A tibble: 6 x 2
+##   storm   pressure
+##   &lt;chr&gt;      &lt;int&gt;
+## 1 Alberto     1007
+## 2 Alex        1009
+## 3 Allison     1005
+## 4 Ana         1013
+## 5 Arlene      1010
+## 6 Arthur      1010</code></pre>
+</section><section id="arrange-ordenar-filas" class="slide level2">
+<h2><code>arrange</code> Ordenar Filas</h2>
+<p><img src="static/img/dplyr/arrange.png" /></p>
+</section><section id="arrange-ejemplo" class="slide level2">
+<h2><code>arrange</code> Ejemplo</h2>
+<p><img src="static/img/dplyr/arrange_example.png" /></p>
+</section><section id="arrange-codigo" class="slide level2">
+<h2><code>arrange</code> Código</h2>
+<pre><code>arrange(storms, wind)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">storms <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(wind)</code></pre></div>
+<pre><code>## # A tibble: 6 x 4
+##   storm    wind pressure date      
+##   &lt;chr&gt;   &lt;int&gt;    &lt;int&gt; &lt;date&gt;    
+## 1 Ana        40     1013 1997-06-30
+## 2 Alex       45     1009 1998-07-27
+## 3 Arthur     45     1010 1996-06-17
+## 4 Arlene     50     1010 1999-06-11
+## 5 Allison    65     1005 1995-06-03
+## 6 Alberto   110     1007 2000-08-03</code></pre>
+</section><section id="mutate-crearmodificar-columnas" class="slide level2">
+<h2><code>mutate</code> Crear/Modificar columnas</h2>
+<p><img src="static/img/dplyr/mutate.png" /></p>
+</section><section id="mutate-ejemplo" class="slide level2">
+<h2><code>mutate</code> Ejemplo</h2>
+<p><img src="static/img/dplyr/mutate_example.png" /></p>
+</section><section id="mutate-codigo" class="slide level2">
+<h2><code>mutate</code> Código</h2>
+<pre><code>mutate(storms, ratio = pressure/wind, inverse = 1/ratio)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">storms <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ratio =</span> pressure<span class="op">/</span>wind, <span class="dt">inverse =</span> <span class="dv">1</span><span class="op">/</span>ratio)</code></pre></div>
+<pre><code>## # A tibble: 6 x 6
+##   storm    wind pressure date       ratio inverse
+##   &lt;chr&gt;   &lt;int&gt;    &lt;int&gt; &lt;date&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 Alberto   110     1007 2000-08-03  9.15  0.109 
+## 2 Alex       45     1009 1998-07-27 22.4   0.0446
+## 3 Allison    65     1005 1995-06-03 15.5   0.0647
+## 4 Ana        40     1013 1997-06-30 25.3   0.0395
+## 5 Arlene     50     1010 1999-06-11 20.2   0.0495
+## 6 Arthur     45     1010 1996-06-17 22.4   0.0446</code></pre>
+</section><section id="summarize-resumir-columnas" class="slide level2">
+<h2><code>summarize</code> Resumir Columnas</h2>
+<p><img src="static/img/dplyr/summarize.png" /></p>
+</section><section id="summarize-ejemplo" class="slide level2">
+<h2><code>summarize</code> Ejemplo</h2>
+<p><img src="static/img/dplyr/summarize_example.png" /></p>
+</section><section id="summarise-codigo" class="slide level2">
+<h2><code>summarise</code> Código</h2>
+<pre><code>summarise(pollution, median = median(amount))</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pollution <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">median =</span> <span class="kw">median</span>(amount))</code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##   median
+##    &lt;dbl&gt;
+## 1   22.5</code></pre>
+</section><section id="group_by-summarize-resumir-columnas-por-grupos" class="slide level2">
+<h2><code>group_by</code> + <code>summarize</code> Resumir Columnas por Grupos</h2>
+<p><img src="static/img/dplyr/group_by_summarize.png" /></p>
+</section><section id="group_by-summarize-ejemplo" class="slide level2">
+<h2><code>group_by</code> + <code>summarize</code> Ejemplo</h2>
+<p><img src="static/img/dplyr/group_by_summarize_example.png" /></p>
+</section><section id="group_by-summarise-codigo" class="slide level2">
+<h2><code>group_by</code> + <code>summarise</code> Código</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pollution <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(city) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(
+    <span class="dt">promedio =</span> <span class="kw">median</span>(amount),
+    <span class="dt">suma =</span> <span class="kw">sum</span>(amount),
+    <span class="dt">n =</span> <span class="kw">n</span>()
+    )</code></pre></div>
+<pre><code>## # A tibble: 3 x 4
+##   city     promedio  suma     n
+##   &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
+## 1 Beijing      88.5   177     2
+## 2 London       19      38     2
+## 3 New York     18.5    37     2</code></pre>
+</section><section id="ejercicios" class="slide level2 center">
+<h2>Ejercicios</h2>
+<p>Revisemos el archivo <code>03-script-manipulacion-datos-01.R</code></p>
+<p>Con el archivo de <a href="http://datos.gob.cl/dataset/28198" class="uri">http://datos.gob.cl/dataset/28198</a></p>
+<ul>
+<li class="fragment">¿Cuatos registros y filas tiene la tabla?</li>
+<li class="fragment">¿Cual es la comuna con mas puntos BIP!?</li>
+<li class="fragment">¿Cual es la entidad/comuna menos repetida?</li>
+<li class="fragment">¿Cuantos centros BIP existen en La Florida?</li>
+</ul>
+</section></section>
+<section><section id="manejo-de-datos-2" class="titleslide slide level1 center white" data-background="#75AADB"><h1>Manejo de Datos 2</h1></section><section id="importar-datos-1" class="slide level2">
+<h2>Importar datos</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">songs &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/songs.csv&quot;</span>)
+songs</code></pre></div>
+<pre><code>## # A tibble: 4 x 2
+##   song                name 
+##   &lt;chr&gt;               &lt;chr&gt;
+## 1 Across the Universe John 
+## 2 Come Together       John 
+## 3 Hello, Goodbye      Paul 
+## 4 Peggy Sue           Buddy</code></pre>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">artists &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/artists.csv&quot;</span>)
+artists</code></pre></div>
+<pre><code>## # A tibble: 4 x 2
+##   name   plays 
+##   &lt;chr&gt;  &lt;chr&gt; 
+## 1 George sitar 
+## 2 John   guitar
+## 3 Paul   bass  
+## 4 Ringo  drums</code></pre>
+</section><section id="left_join-juntar-tablas" class="slide level2">
+<h2><code>left_join</code> Juntar tablas</h2>
+<p><img src="static/img/dplyr/left_join.png" /></p>
+</section><section id="left_join-codigo" class="slide level2">
+<h2><code>left_join</code> Código</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">left_join</span>(songs, artists, <span class="dt">by =</span> <span class="st">&quot;name&quot;</span>)</code></pre></div>
+<pre><code>## # A tibble: 4 x 3
+##   song                name  plays 
+##   &lt;chr&gt;               &lt;chr&gt; &lt;chr&gt; 
+## 1 Across the Universe John  guitar
+## 2 Come Together       John  guitar
+## 3 Hello, Goodbye      Paul  bass  
+## 4 Peggy Sue           Buddy &lt;NA&gt;</code></pre>
+</section><section id="importar-datos-2" class="slide level2">
+<h2>Importar datos 2</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">data</span>(<span class="st">&quot;table4a&quot;</span>)
+table4a</code></pre></div>
+<pre><code>## # A tibble: 3 x 3
+##   country     `1999` `2000`
+## * &lt;chr&gt;        &lt;int&gt;  &lt;int&gt;
+## 1 Afghanistan    745   2666
+## 2 Brazil       37737  80488
+## 3 China       212258 213766</code></pre>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;table2&quot;</span>)
+table2</code></pre></div>
+<pre><code>## # A tibble: 12 x 4
+##    country      year type            count
+##    &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;           &lt;int&gt;
+##  1 Afghanistan  1999 cases             745
+##  2 Afghanistan  1999 population   19987071
+##  3 Afghanistan  2000 cases            2666
+##  4 Afghanistan  2000 population   20595360
+##  5 Brazil       1999 cases           37737
+##  6 Brazil       1999 population  172006362
+##  7 Brazil       2000 cases           80488
+##  8 Brazil       2000 population  174504898
+##  9 China        1999 cases          212258
+## 10 China        1999 population 1272915272
+## 11 China        2000 cases          213766
+## 12 China        2000 population 1280428583</code></pre>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cases &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/cases.csv&quot;</span>)
+cases</code></pre></div>
+<pre><code>## # A tibble: 3 x 4
+##   country `2011` `2012` `2013`
+##   &lt;chr&gt;    &lt;int&gt;  &lt;int&gt;  &lt;int&gt;
+## 1 FR        7000   6900   7000
+## 2 DE        5800   6000   6200
+## 3 US       15000  14000  13000</code></pre>
+<p>¿Como obtendríamos el promedio por país?</p>
+</section><section id="como-obtendriamos-el-promedio-por-pais" class="slide level2">
+<h2>¿Como obtendríamos el promedio por país?</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cases <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">promedio =</span> (<span class="st">`</span><span class="dt">2011</span><span class="st">`</span> <span class="op">+</span><span class="st"> `</span><span class="dt">2012</span><span class="st">`</span> <span class="op">+</span><span class="st"> `</span><span class="dt">2013</span><span class="st">`</span>)<span class="op">/</span><span class="dv">3</span>)</code></pre></div>
+<pre><code>## # A tibble: 3 x 5
+##   country `2011` `2012` `2013` promedio
+##   &lt;chr&gt;    &lt;int&gt;  &lt;int&gt;  &lt;int&gt;    &lt;dbl&gt;
+## 1 FR        7000   6900   7000    6967.
+## 2 DE        5800   6000   6200    6000 
+## 3 US       15000  14000  13000   14000</code></pre>
+<p>Ahora pensemos en una tabla más grande, con más años</p>
+</section><section id="gather-recolectar" class="slide level2">
+<h2><code>gather</code> Recolectar</h2>
+<p>Coloca nombres de columnas en una variable (columna) <strong>key</strong>, recolectando los valores (<strong>value</strong>) de las columnas en un <strong>sola</strong> columna</p>
+<p><img src="static/img/tidyr/gather.png" /></p>
+</section><section id="gather-ejemplo" class="slide level2">
+<h2><code>gather</code> Ejemplo</h2>
+<p><img src="static/img/tidyr/gather_example.png" /></p>
+</section><section id="gather-codigo" class="slide level2">
+<h2><code>gather</code> Código</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gather</span>(table4a, <span class="st">`</span><span class="dt">1999</span><span class="st">`</span>, <span class="st">`</span><span class="dt">2000</span><span class="st">`</span>, <span class="dt">key =</span> <span class="st">&quot;year&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;cases&quot;</span>)</code></pre></div>
+<pre><code>## # A tibble: 6 x 3
+##   country     year   cases
+##   &lt;chr&gt;       &lt;chr&gt;  &lt;int&gt;
+## 1 Afghanistan 1999     745
+## 2 Brazil      1999   37737
+## 3 China       1999  212258
+## 4 Afghanistan 2000    2666
+## 5 Brazil      2000   80488
+## 6 China       2000  213766</code></pre>
+</section><section id="spread-esparcir" class="slide level2">
+<h2><code>spread</code> Esparcir</h2>
+<p>Esparce un par de columnas (2, key-value) en multiples columnas</p>
+<p><img src="static/img/tidyr/spread.png" /></p>
+</section><section id="spread-ejemplo" class="slide level2">
+<h2><code>spread</code> Ejemplo</h2>
+<p><img src="static/img/tidyr/spread_example.png" /></p>
+</section><section id="spread-codigo" class="slide level2">
+<h2><code>spread</code> Código</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">spread</span>(table2, type, count)</code></pre></div>
+<pre><code>## # A tibble: 6 x 4
+##   country      year  cases population
+##   &lt;chr&gt;       &lt;int&gt;  &lt;int&gt;      &lt;int&gt;
+## 1 Afghanistan  1999    745   19987071
+## 2 Afghanistan  2000   2666   20595360
+## 3 Brazil       1999  37737  172006362
+## 4 Brazil       2000  80488  174504898
+## 5 China        1999 212258 1272915272
+## 6 China        2000 213766 1280428583</code></pre>
+</section><section id="ejercicios-1" class="slide level2 center">
+<h2>Ejercicios</h2>
+<p>Revisemos el archivo <code>03-script-manipulacion-datos-02.R</code></p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="static/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="static/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: false,
+        // Display the page number of the current slide
+        slideNumber: false,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'static/reveal.js-3.3.0.1/plugin/zoom-js/zoom.js', async: true },
+        ]
+      });
+    </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>

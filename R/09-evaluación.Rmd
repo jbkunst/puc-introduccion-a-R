@@ -1,0 +1,117 @@
+---
+title: "Evaluación"
+output:
+  word_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+
+## Consideraciones
+
+- Para esta evaluación usted debera entregar un script de R con los comandos
+necesarios para responder cada uno de los puntos. 
+- Además se evaluará la calidad (no necesariamente la cantidad) de comentarios
+en las respuestas.
+- Esta evaluación se puede hacer en grupo de máximo 3 personas.
+- La forma de entrega será vía email a __jbkunst@gmail.com__ con plazo el 
+día viernes 7 de diciembre.
+
+
+## Ejericicio 1
+
+Considere los siguientes datos de alumnos encuestados al final de semestre sobre
+un curso de R:
+
+```{r, cache=TRUE}
+library(tidyverse)
+
+alumnos <- read_csv("https://goo.gl/Wy3GsU")
+glimpse(alumnos)
+```
+
+A cada alumno encuestado se le preguntó sobre su satisfacción y percepción de
+la duración del curso.
+
+- Obtenga un diagrama de puntos entre las variables `duracion` y `satisfaccion`.
+- Comente respecto al resultado. Intente realizar una hipótesis respecto a lo
+que observa. 
+- Al gráfico anterior agregue una línea de tendencia usando la funcion 
+`geom_smooth` (Puede revisar ejemplos, ejecutar `?geom_smooth`)
+
+Ahora suponga que el equipo académico le recomienda considerar el grupo de donde
+el alumno proviene para así seguir estudiando la evidencia encontrada en el 
+punto anterior:
+
+- Vuelva a hacer un diagrama de puntos pero ahora diferenciando mediante el color
+al grupo al que el alumno pertenece.
+- Al grafico anterior agregue una línea de tendendencia y además utilice el
+comando `facet_wrap` para crear graficos de acuerdo al grupo del alumno.
+- Con lo obtenido, ¿Qué sucede con la hipótesis obtenida
+anteriormente?
+
+## Ejercicio 2
+
+En esta parte trabajaremos con datos de variaciones de temperatura durante los 
+años:
+
+```{r, cache=TRUE}
+temperatura <- read_csv("https://goo.gl/3JUCma")
+temperatura
+```
+
+- Relice un gráfico de línea considerando las columnas `anio_mes` y `mediana`
+- Ahora cargue el paquete `lubridate`, y usando las funciones `year` y `month`
+sobre la columna `anio_mes` cree dos variables en la tabla `temperatura` 
+y nómbrelas como `anio` y `mes`.
+- Revise y considere los ejemplo de `geom_raster` (intente ejecutar `?geom_raster`)
+para usarlo con los datos de `anio`, `mes` y `mediana` y comenta que observas.
+- Agrupe la tabla temperatura usando la columna `anio` para obtener el promedio
+de la columna `mediana`.
+- Con lo anterior vuelva a obtener un grafico del promedio obtenido anteriormente
+por año.
+- Si tuviese que escoger alguna de las dos alternativas de gráficos de líneas
+para presentarla a alguién que nuevo en el tema, ¿Cual escogería y por que?
+
+## Ejercicio 3
+
+Trabajaremos con los siguientes datos utilizados anteriormente:
+
+```{r cache=TRUE}
+miembros <- read_csv("https://goo.gl/Tigfaj")
+glimpse(miembros)
+
+movimientos <- read_csv("https://goo.gl/fT3jwT")
+glimpse(movimientos)
+```
+
+Con la función `ymd_hms` del paquete `lubridate` puede _parsear_ (convertir) 
+la columna fecha (que es texto!) a fecha-hora. Luego con la función `as.Date` 
+puedes tranformar el campo de fecha-hora a fecha.
+
+- Con lo anterior agrupe por dias y obtenga el número de operaciones, 
+como también el importe total por día de la tabla `movimientos`.
+- Grafique, de forma separada estas dos variables (por fecha). ¿Qué tipo de 
+`geom_` puede ser opción?
+- Obtenga la suma de los importes por actividad de los miembros
+- Con la tabla anterior grafíquelos usando `geom_col`.
+- Obtenga la suma de los importes por actividad y hora, luego utilice `geom_tile`
+para mostrar la información obtenida y comente.
+ - ¿Que es lo que muestra el siguiente gráfico, y que podría hacer con esta
+información en el caso que usted sea?
+
+
+```{r}
+library(tidyverse)
+
+ggplot(movimientos) +
+  geom_point(aes(importe, actividad), alpha = 0.5)
+```
+
+- Usando la imagen anterior identifique usted 3 casos (puntos/movimientos) que 
+le llamen la atentción y descríbalos: Describiendo la hora, quien realizó la 
+operación, el monto, la actividad, etc, y comente si el dato parece digno de 
+investigar o no.

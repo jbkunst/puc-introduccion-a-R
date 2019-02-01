@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Computación estadística con R</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="static/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="static/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="static\css\styles.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section><section id="computacion-estadistica-con-r-introduccion-a-la-estadistica-joshua-kunst-2018" class="titleslide slide level1 center white" data-background="#75AADB"><h1>Computación Estadística con R<br>Introducción a la Estadística<br><small>Joshua Kunst, 2018</small></h1></section><section id="definiciones" class="slide level2">
+<h2>Definiciones</h2>
+<ul>
+<li class="fragment">Estadística. Rama matemática que estudia observaciones/mediciones de una población; usualmente de una muestra</li>
+<li class="fragment">Población. Conjunto de individuos, elementos de interés</li>
+<li class="fragment">Muestra. Una parte (subconjunto) de la población</li>
+<li class="fragment">Muestreo. Proceso de selección de la muestra (algoritmo)</li>
+<li class="fragment">Unidad de Muestreo. Es uno o más elementos de la población. El total constituyen la población</li>
+</ul>
+</section><section id="ejercicio-motivacional" class="slide level2">
+<h2>Ejercicio Motivacional</h2>
+<ul>
+<li class="fragment">Tenemos una tienda y cierta cantidad de clientes, digamos 20 (<strong>problación</strong>)</li>
+<li class="fragment">Estamos preocupado de conocer la satisafacción promedio de nuestros clientes (<strong>parámetro de interés</strong>)</li>
+<li class="fragment">Por dinero y tiempo (= dinero) podemos hacer solo 5 llamadas (<strong>unidad de muestreo</strong>)</li>
+</ul>
+</section><section class="slide level2">
+
+<p>Las 20 <em>satifacciones</em> en escala de 1 a 10 son las siguientes en cierto orden:</p>
+<p>2, 2, 3, 3, 3, 4, 5, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9, 10, 10, 10</p>
+<p>Por tanto nuestra la satisfacción promedio de nuestros clientes es 6.5</p>
+<p><strong>No las conocemos</strong></p>
+</section><section class="slide level2">
+
+<p><strong>Dimensión paralela 1</strong></p>
+<p>Supongamos que seleccionamos los primeros de nuestra lista por comodidad (<strong>Proceso de muestreo</strong>)</p>
+<p>2 2 3 3 3</p>
+<p>Y así nuestro satisfacción promedio de satisfacción en la muestra es 2.6</p>
+</section><section class="slide level2">
+
+<p><strong>Dimensión paralela 2</strong></p>
+<p>Supongamos que seleccionamos los últimos de nuestra lista por que nuestra tienda es <em>Les Contreras</em></p>
+<p>9 9 10 10 10</p>
+<p>Y así nuestro satisfacción promedio de satisfacción en la muestra es 9.6</p>
+</section><section class="slide level2">
+
+<p>¿Cuál es la dimesión correcta?</p>
+<p>Las dimensiones 1 y 2 comete el error de sesgo por selección</p>
+<p><a href="https://www.youtube.com/watch?v=p52Nep7CBdQ" class="uri">https://www.youtube.com/watch?v=p52Nep7CBdQ</a></p>
+<p>Entonces ¿qué hacer?</p>
+</section><section id="tipos-de-estadistica" class="slide level2">
+<h2>Tipos de Estadística</h2>
+<p>Descriptiva e Inferencial</p>
+<p><img src="static/img/types.png"></p>
+</section><section id="tipos-de-estadistica-1" class="slide level2">
+<h2>Tipos de Estadística</h2>
+<p><img src="static/img/stats_process.gif"></p>
+</section></section>
+<section><section id="estadistica-descriptiva" class="titleslide slide level1 center white" data-background="#75AADB"><h1>Estadística Descriptiva</h1></section><section id="estadistica-descriptiva-1" class="slide level2">
+<h2>Estadística Descriptiva</h2>
+<p>Conjunto de procedimientos para <strong>resumir</strong> datos</p>
+<ul>
+<li class="fragment">Medidas de tendencia central y dispersión<span class="fragment">. No solo basta con ver que valores puede tomar una variable<span></li>
+<li class="fragment">Visualización de datos<span class="fragment">. Distintos gráficos nos cuentan diferente información acerca de la variable(s)<span></li>
+</ul>
+<p><span class="fragment"><strong>Sintetizar información</strong><span></p>
+</section><section id="medidas-de-tendencia-y-dispersion" class="slide level2">
+<h2>Medidas de Tendencia y Dispersión</h2>
+<p>Son indicadores (generalmente un número) obtenidos de los datos que <strong>resumen</strong> información y nos hablan de alguna característica de la <strong>distribución</strong> de la variable</p>
+<p><span class="fragment">Nos ayudan a tener una idea más fina en <strong>donde se concentran</strong> las variables y que <strong>tan concentrados</strong> están los valores</span></p>
+</section><section id="medidas-de-tendencia-central" class="slide level2">
+<h2>Medidas de Tendencia Central</h2>
+<p>Nos señalan el valor en <em>torno al cual se concentran los datos</em></p>
+<ul>
+<li><strong>Media</strong> o <strong>Promedio</strong>: La suma de los datos dividido por la cantidad de los mismos</li>
+<li>Mediana: Es el valor que está al medio cuando los datos se ordenan</li>
+<li>Moda: Es el valor que más se repite. Este se usa cuando la variable es <em>discreta</em></li>
+</ul>
+</section><section id="medidas-de-dispersion" class="slide level2">
+<h2>Medidas de Dispersión</h2>
+<p>Son valores que nos describen la dispersión de los datos. Es decir, <strong>que tan concentrados</strong> están:</p>
+<ul>
+<li><strong>Desviación estándar</strong>: Mide el grado de dispersión en torno a la media</li>
+<li>Rango: Es el tamaño del intervalo que cubren los datos, el mayor valor menos el mínimo</li>
+<li>Quantiles: Valores donde se acumula % de información</li>
+</ul>
+</section><section id="ejercicio" class="slide level2">
+<h2>Ejercicio</h2>
+<p>Supongamos que debemos decidir en curso debe ir nuestro hijo/sobrino/simil, entre el curso <strong>narnajo</strong> o <strong>azul</strong>. Nos dicen que el promedio de notas finales del año anterior para cada curso fue.</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">curso</th>
+<th style="text-align: right;">cantidad_de_alumnos</th>
+<th style="text-align: right;">promedio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">azul</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">5.23</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">naranjo</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">4.99</td>
+</tr>
+</tbody>
+</table>
+</section><section class="slide level2">
+
+<p>Más información:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">curso</th>
+<th style="text-align: right;">cantidad_de_alumnos</th>
+<th style="text-align: right;">promedio</th>
+<th style="text-align: right;">maxima_nota</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">azul</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">5.23</td>
+<td style="text-align: right;">7.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">naranjo</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">4.99</td>
+<td style="text-align: right;">5.53</td>
+</tr>
+</tbody>
+</table>
+</section><section class="slide level2">
+
+<p><img src="static/img/07/unnamed-chunk-8-1.svg" width="960" /></p>
+</section><section class="slide level2">
+
+<p>Quizás un poco más de información ayuda</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">estadistico</th>
+<th style="text-align: right;">azul</th>
+<th style="text-align: right;">naranjo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">cantidad_de_alumnos</td>
+<td style="text-align: right;">50.00</td>
+<td style="text-align: right;">50.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">desviacion_estandiar</td>
+<td style="text-align: right;">1.33</td>
+<td style="text-align: right;">0.27</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">maximo</td>
+<td style="text-align: right;">7.00</td>
+<td style="text-align: right;">5.53</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mediana</td>
+<td style="text-align: right;">4.65</td>
+<td style="text-align: right;">5.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">minimo</td>
+<td style="text-align: right;">4.00</td>
+<td style="text-align: right;">4.40</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">promedio</td>
+<td style="text-align: right;">5.23</td>
+<td style="text-align: right;">4.99</td>
+</tr>
+</tbody>
+</table>
+</section><section id="algunas-frases" class="slide level2">
+<h2>Algunas frases</h2>
+<ul>
+<li class="fragment">El promedio no vale mucho sin un indicador de variablidad</li>
+<li class="fragment">Guiarse por un valor solamente es usualmente peligroso para tomar de decisiones</li>
+</ul>
+</section><section id="ejemplo-interactivo" class="slide level2">
+<h2>Ejemplo Interactivo</h2>
+<p>Revisar:</p>
+<p><a href="https://rawgit.com/juba/uniquanti/master/index.html" class="uri">https://rawgit.com/juba/uniquanti/master/index.html</a></p>
+</section></section>
+<section><section id="estadistica-inferencial" class="titleslide slide level1 center white" data-background="#75AADB"><h1>Estadística Inferencial</h1></section><section id="intervalo-de-confianza-para-la-media" class="slide level2">
+<h2>Intervalo de Confianza para la media</h2>
+<p>Se asume que se tiene un vector numérico (posiblemente muestra) <code>x</code>. Se obtiene con el comando <code>t.test</code>. De esta forma si asumimos <code>d1 &lt;- c(2, 2, 3, 3, 3)</code> Entonces:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>)
+<span class="kw">t.test</span>(d1)</code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  d1
+## t = 10.614, df = 4, p-value = 0.000446
+## alternative hypothesis: true mean is not equal to 0
+## 95 percent confidence interval:
+##  1.919913 3.280087
+## sample estimates:
+## mean of x 
+##       2.6</code></pre>
+</section><section class="slide level2">
+
+<p>Mejor alternativa, es usar la función <code>tidy</code> del paquete <code>broom</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
+d3 &lt;-<span class="st"> </span><span class="kw">sample</span>(x, <span class="dt">size =</span> <span class="dv">10</span>)
+d3</code></pre></div>
+<pre><code>##  [1]  8  3 10  7 10  7  8  9  4  3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tidy</span>(<span class="kw">t.test</span>(d3))</code></pre></div>
+<pre><code>## # A tibble: 1 x 8
+##   estimate statistic p.value parameter conf.low conf.high method
+##      &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+## 1      6.9      8.13 1.95e-5         9     4.98      8.82 One S~
+## # ... with 1 more variable: alternative &lt;chr&gt;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tidy</span>(<span class="kw">t.test</span>(d3, <span class="dt">conf.level =</span> .<span class="dv">99</span>))</code></pre></div>
+<pre><code>## # A tibble: 1 x 8
+##   estimate statistic p.value parameter conf.low conf.high method
+##      &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+## 1      6.9      8.13 1.95e-5         9     4.14      9.66 One S~
+## # ... with 1 more variable: alternative &lt;chr&gt;</code></pre>
+</section><section id="intervalo-de-confianza-para-la-proporcion" class="slide level2">
+<h2>Intervalo de Confianza para la proporción</h2>
+<p>En este caso, supongamos que deseamos estimar la proporción de un evento.</p>
+<p>Por ejemplo, de nuestra fábrica deseamos saber la tasa de productos defectuosos. Se obtiene una muestra de 1000 productos y 25 de ellos lo son. Si exist evidencia que la tasa es mayor o igual a 3% se destinaran gastos a remediar el problema.</p>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">binom.test</span>(<span class="dv">25</span>, <span class="dv">1000</span>)</code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  25 and 1000
+## number of successes = 25, number of trials = 1000, p-value &lt;
+## 2.2e-16
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.01624254 0.03668482
+## sample estimates:
+## probability of success 
+##                  0.025</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tidy</span>(<span class="kw">binom.test</span>(<span class="dv">25</span>, <span class="dv">1000</span>))</code></pre></div>
+<pre><code>## # A tibble: 1 x 8
+##   estimate statistic   p.value parameter conf.low conf.high method
+##      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+## 1    0.025        25 9.13e-252      1000   0.0162    0.0367 Exact~
+## # ... with 1 more variable: alternative &lt;chr&gt;</code></pre>
+</section><section id="otro-ejemplo-interactivo" class="slide level2">
+<h2>Otro ejemplo interactivo</h2>
+<p><a href="https://istats.shinyapps.io/ExploreCoverage/" class="uri">https://istats.shinyapps.io/ExploreCoverage/</a></p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="static/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="static/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: false,
+        // Display the page number of the current slide
+        slideNumber: false,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'static/reveal.js-3.3.0.1/plugin/zoom-js/zoom.js', async: true },
+        ]
+      });
+    </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>

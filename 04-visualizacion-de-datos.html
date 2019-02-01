@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Computación estadística con R</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="static/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="static/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="static\css\styles.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section><section id="computacion-estadistica-con-r-visualzacion-de-datos-joshua-kunst-2018" class="titleslide slide level1 center white" data-background="#75AADB"><h1>Computación Estadística con R<br>Visualzación de Datos<br><small>Joshua Kunst, 2018</small></h1></section><section id="estructura" class="slide level2">
+<h2>Estructura</h2>
+<ul>
+<li class="fragment">¿Por que?</li>
+<li class="fragment">Definiciones</li>
+<li class="fragment">Recomendaciones Técnicas &amp; Visuales</li>
+<li class="fragment">Ejercicios y concursos</li>
+</ul>
+</section><section id="por-que-visualizacion" class="slide level2">
+<h2>¿Por que visualización?</h2>
+<p><img src="http://img.kiosko.net/2017/07/18/uk/ft_uk.750.jpg" /></p>
+</section><section class="slide level2">
+
+<p><img src="https://pbs.twimg.com/media/DSNbnLrXkAAibaB.jpg" /></p>
+<!-- https://twitter.com/sdbernard/status/946701218298126341  -->
+</section><section id="definicion-tecnica-posible" class="slide level2">
+<h2>Definición técnica (Posible)</h2>
+<p>Representación gráfica de datos <strong>codificando la información</strong> como: posición, tamaño, formas, colores</p>
+<p><img src="static/img/data-viz.jpg" width="60%"></p>
+</section><section class="slide level2">
+
+<p>Muchos sabores:</p>
+<p><img src="static/img/charts.gif" /></p>
+</section><section class="slide level2">
+
+<p>Cosas importantes sobre visualización de datos:</p>
+<ul>
+<li class="fragment">Lleva información, es un mensaje</li>
+<li class="fragment">Ejercicio mental para interpretar o <em>decodificar</em>(!!) información</li>
+<li class="fragment">No siempre es el fin</li>
+<li class="fragment">Herramienta exploratoria</li>
+<li class="fragment">Distintas visualizaciones en mismos datos / Distintas historias</li>
+</ul>
+</section><section class="slide level2">
+
+<p><img src="static/img/04/unnamed-chunk-2-1.svg" width="960" /></p>
+</section><section class="slide level2">
+
+<p><img src="static/img/04/unnamed-chunk-3-1.svg" width="960" /></p>
+</section><section class="slide level2">
+
+<p><img src="static/img/04/unnamed-chunk-4-1.svg" width="960" /></p>
+</section><section class="slide level2">
+
+<p><img src="static/img/04/unnamed-chunk-5-1.svg" width="960" /></p>
+</section><section class="slide level2">
+
+<p><img src="static/img/04/unnamed-chunk-6-1.svg" width="960" /></p>
+</section><section id="ejercicio" class="slide level2">
+<h2>Ejercicio</h2>
+<p>¿Existe el mejor gráfico? ¿Cuál de las siguientes formas funciona mejor con el títutlo?</p>
+<p><strong>La región del sur exhibe el mayor crecimiento</strong></p>
+<p><br> <small> Adapatado del tweet de <a href="https://twitter.com/lisacrost/status/948233069110222848">Lisa Charlotte Rost</a> que a su vez está viene del ejemplo del libro “Show me the numbers” de Stephen Few </small> </span></p>
+</section><section class="slide level2">
+
+<p>Los datos:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">region</th>
+<th style="text-align: right;">Q1</th>
+<th style="text-align: right;">Q2</th>
+<th style="text-align: right;">Q3</th>
+<th style="text-align: right;">Q4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">sur</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">225</td>
+<td style="text-align: right;">290</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">norte</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">160</td>
+<td style="text-align: right;">180</td>
+<td style="text-align: right;">300</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">este</td>
+<td style="text-align: right;">180</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">240</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">oeste</td>
+<td style="text-align: right;">250</td>
+<td style="text-align: right;">250</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: right;">170</td>
+</tr>
+</tbody>
+</table>
+</section><section class="slide level2">
+
+<p>Opción #1</p>
+<p><img src="static/img/04/unnamed-chunk-8-1.svg" width="960" /></p>
+</section><section class="slide level2">
+
+<p>Opción #2</p>
+<p><img src="static/img/04/unnamed-chunk-9-1.svg" width="960" /></p>
+</section><section class="slide level2">
+
+<p><img src="static/img/04/unnamed-chunk-10-1.svg" width="960" /></p>
+</section><section class="slide level2">
+
+<p><br></p>
+<p><img src="static/img/04/unnamed-chunk-11-1.svg" width="1152" /></p>
+</section><section class="slide level2">
+
+<p>(Posible) Respuesta</p>
+<p><strong>No. Dependerá de tu mensaje, de tu historia.</strong></p>
+</section></section>
+<section><section id="recomendaciones-tecnicas-y-algunas-miscelaneas" class="titleslide slide level1 center white" data-background="#75AADB"><h1>Recomendaciones Técnicas <br> y algunas Misceláneas</h1></section><section id="pie-charts-o-tortas" class="slide level2">
+<h2>Pie Charts (o tortas)</h2>
+<!-- https://twitter.com/MetricsHulk/status/728014668913102848 -->
+<p><img src="https://pbs.twimg.com/media/Chpte5BVEAA-ppy.jpg" width="80%"/></p>
+</section><section class="slide level2">
+
+<p>Usuales dificultades</p>
+<ul>
+<li class="fragment">Compara áreas</li>
+<li class="fragment">Ejercicio mental de rotar para comparar categorías</li>
+</ul>
+</section><section class="slide level2">
+
+<p>Es muy usado es el <strong>pie chart</strong></p>
+<p><img src="static/img/04/unnamed-chunk-12-1.svg" width="960" /></p>
+</section><section class="slide level2">
+
+<p>Es muy (<strong>ab</strong>)usado es el <strong>pie chart</strong></p>
+<p><img src="static/img/04/unnamed-chunk-13-1.svg" width="960" /></p>
+</section><section class="slide level2">
+
+<p><img src="static/img/omgpie.gif" width="80%"></p>
+</section><section id="puntos-de-referencia" class="slide level2">
+<h2>Puntos de Referencia</h2>
+</section><section class="slide level2">
+
+<p><br> <img src="static/img/pinera.jpg" /></p>
+</section><section class="slide level2">
+
+<p><br> <img src="static/img/pinera2.jpg" /></p>
+</section><section class="slide level2">
+
+<p><img src="static/img/04/unnamed-chunk-14-1.svg" width="960" /></p>
+</section><section id="convenciones" class="slide level2">
+<h2>Convenciones</h2>
+<p>Ejercicio 2. Encuentre las <em>anomalías</em></p>
+<!-- https://twitter.com/MetricsHulk/status/735913911212515329 -->
+<p><img src="https://pbs.twimg.com/media/CjZ9zUjWUAAkWEt.jpg" width="40%" /></p>
+</section><section class="slide level2">
+
+<p>Rápidamente ¿Dónde se produce el máximo?</p>
+<p><img src="static/img/gun.jpg" width="40%" /></p>
+</section><section id="tipografia" class="slide level2">
+<h2>Tipografía</h2>
+<p>¿Conocen a …?</p>
+<span class="fragment">
+<h1>
+<font face="Arial">Arial</font>
+</h1>
+</span> <span class="fragment">
+<h1>
+<font face="Times New Roman">Times New Roman</font>
+</h1>
+</span> <span class="fragment">
+<h1>
+<font face="Comic Sans MS">Comic Sans</font>
+</h1>
+<p></span></p>
+</section><section class="slide level2">
+
+<p><img src="static/img/comicsanscriminal.png" /></p>
+</section><section class="slide level2">
+
+<p>Según <font face="Comic Sans MS"><a href="http://www.comicsanscriminal.com/">comic sans criminal</a></font>:</p>
+<ul>
+<li class="fragment">Fuentes tienen personalidad</li>
+<li class="fragment">Tiene un propósito</li>
+<li class="fragment">Armonía en el universo</li>
+</ul>
+</section><section id="colores" class="slide level2">
+<h2>Colores</h2>
+<p>La misma idea de las convenciones!</p>
+<h1>
+<big><strong> 1 2 3 <span style="color:red">4</span> 5 6 </strong></big>
+</h1>
+<ul>
+<li class="fragment">Dar foco y llamar la atención</li>
+<li class="fragment">Debiesen ser corcondantes con el dato</li>
+</ul>
+</section><section class="slide level2">
+
+<p><img src="static/img/04/unnamed-chunk-15-1.svg" width="960" /></p>
+</section><section class="slide level2">
+
+<p><img src="static/img/04/unnamed-chunk-16-1.svg" width="960" /></p>
+</section><section class="slide level2">
+
+<p><img src="static/img/04/unnamed-chunk-17-1.svg" width="960" /></p>
+</section><section class="slide level2">
+
+<p><img src="static/img/04/unnamed-chunk-18-1.svg" width="960" /></p>
+</section><section id="etiquetas" class="slide level2">
+<h2>Etiquetas</h2>
+</section><section class="slide level2">
+
+<p><img src="static/img/04/unnamed-chunk-19-1.svg" width="960" /></p>
+</section><section class="slide level2">
+
+<p><img src="static/img/04/unnamed-chunk-20-1.svg" width="960" /></p>
+</section><section class="slide level2">
+
+<p><img src="static/img/04/unnamed-chunk-21-1.svg" width="960" /></p>
+</section><section class="slide level2">
+
+<p><img src="static/img/04/unnamed-chunk-22-1.svg" width="960" /></p>
+</section></section>
+<section><section id="visualizando-con-ggplot2" class="titleslide slide level1 center white" data-background="#75AADB"><h1>Visualizando con ggplot2</h1></section><section id="ggplot2" class="slide level2">
+<h2>ggplot2</h2>
+<p>Características:</p>
+<ul>
+<li class="fragment">Paquete para visualizar datos mediante capas</li>
+<li class="fragment">Es muy poderoso y flexible</li>
+<li class="fragment">Se carga junto al <code>tidyverse</code></li>
+<li class="fragment">No es la única opción en R para graficar</li>
+</ul>
+</section><section id="datos" class="slide level2">
+<h2>Datos</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gapminder)
+<span class="kw">data</span>(gapminder)
+paises &lt;-<span class="st"> </span>gapminder <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(year))
+paises</code></pre></div>
+<pre><code>## # A tibble: 142 x 6
+##    country     continent  year lifeExp       pop gdpPercap
+##    &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
+##  1 Afghanistan Asia       2007    43.8  31889923      975.
+##  2 Albania     Europe     2007    76.4   3600523     5937.
+##  3 Algeria     Africa     2007    72.3  33333216     6223.
+##  4 Angola      Africa     2007    42.7  12420476     4797.
+##  5 Argentina   Americas   2007    75.3  40301927    12779.
+##  6 Australia   Oceania    2007    81.2  20434176    34435.
+##  7 Austria     Europe     2007    79.8   8199783    36126.
+##  8 Bahrain     Asia       2007    75.6    708573    29796.
+##  9 Bangladesh  Asia       2007    64.1 150448339     1391.
+## 10 Belgium     Europe     2007    79.4  10392226    33693.
+## # ... with 132 more rows</code></pre>
+</section><section id="creando-un-grafico" class="slide level2">
+<h2>Creando un gráfico :)</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises)</code></pre></div>
+<p><img src="static/img/04/unnamed-chunk-25-1.svg" width="960" /></p>
+</section><section id="mejorando-un-grafico" class="slide level2">
+<h2>Mejorando un gráfico</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap))</code></pre></div>
+<p><img src="static/img/04/unnamed-chunk-26-1.svg" width="960" /></p>
+</section><section id="que-sucedio" class="slide level2">
+<h2>Que sucedió?</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap))</code></pre></div>
+<p><small></p>
+<ul>
+<li class="fragment"><code>ggplot()</code> crea un sistema de coordenadas al cual se pueden agregar capas</li>
+<li class="fragment"><code>ggplot(data = paises)</code> da un grafico vacío pues no agregamos capas</li>
+<li class="fragment"><code>geom_point()</code> agrega una capa de puntos al gráfico usando las filas de <code>paises</code></li>
+<li class="fragment">Cada función <code>geom_algo</code> tiene un argumento de mapping que define cómo se asignan o se “mapean” las variables del conjunto de datos a propiedades visuales del <code>geom_algo</code></li>
+<li class="fragment">El argumento de mapping siempre aparece emparejado con <code>aes()</code>, y los argumentos <code>x</code> e <code>y</code> especifican qué variables asignar a los ejes <code>x</code> e <code>y</code></li>
+</ul>
+<p></small></p>
+</section><section class="slide level2">
+
+<p>Podemos setear las propiedades estéticas de tu geom manualmente:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap), <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<p><img src="static/img/04/unnamed-chunk-27-1.svg" width="960" /></p>
+</section><section class="slide level2">
+
+<p>En este caso un punto no solo puede poseer x e y, puede tener tamaño dado por una variable</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap, <span class="dt">size =</span> pop), <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<p><img src="static/img/04/unnamed-chunk-28-1.svg" width="960" /></p>
+</section><section class="slide level2">
+
+<p>Quizás en lugar de setar color fijo, podemos asignarlo segun una variable</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap, <span class="dt">size =</span> pop, <span class="dt">color =</span> continent))</code></pre></div>
+<p><img src="static/img/04/unnamed-chunk-29-1.svg" width="960" /></p>
+</section><section class="slide level2">
+
+<p>O realizar <em>facets</em>/paneles</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap, <span class="dt">size =</span> pop)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(continent))</code></pre></div>
+<p><img src="static/img/04/unnamed-chunk-30-1.svg" width="960" /></p>
+</section><section id="ejercicios" class="slide level2">
+<h2>Ejercicios</h2>
+<p>Revisemos el archivo <code>04-script-visualizacion-datos.R</code></p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="static/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="static/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: false,
+        // Display the page number of the current slide
+        slideNumber: false,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'static/reveal.js-3.3.0.1/plugin/zoom-js/zoom.js', async: true },
+        ]
+      });
+    </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>

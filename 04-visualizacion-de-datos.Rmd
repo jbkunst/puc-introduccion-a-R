@@ -1,0 +1,641 @@
+---
+title: false
+pagetitle: 'Computación estadística con R'
+author: false
+output:
+  revealjs::revealjs_presentation:
+    lib_dir: static
+    self_contained: false
+    reveal_plugins: ["zoom"]
+    mathjax: null
+    transition: fade
+    css: ["static/css/styles.css"]
+    incremental: true
+    center: false
+    theme: simple
+    fig_width: 6
+    fig_height: 3.5
+    reveal_options:
+      slideNumber: false
+      controls: false
+      mouseWheel: false
+editor_options: 
+  chunk_output_type: console
+---
+
+# Computación Estadística con R<br>Visualzación de Datos<br><small>Joshua Kunst, 2018</small>{ .center .white data-background="#75AADB" }
+
+```{r, include = FALSE}
+source("R/setup.R")
+knitr::opts_chunk$set(fig.path = "static/img/04/", echo = FALSE, cache = TRUE)
+```
+
+## Estructura
+
+- ¿Por que?
+- Definiciones 
+- Recomendaciones Técnicas & Visuales
+- Ejercicios y concursos
+
+## ¿Por que visualización?
+
+![](http://img.kiosko.net/2017/07/18/uk/ft_uk.750.jpg)
+
+----
+
+![](https://pbs.twimg.com/media/DSNbnLrXkAAibaB.jpg)
+
+<!-- https://twitter.com/sdbernard/status/946701218298126341  -->
+
+## Definición técnica (Posible)
+
+Representación gráfica de datos __codificando la información__ como: posición, tamaño, formas, colores
+
+<img src="static/img/data-viz.jpg" width="60%">
+
+----
+
+Muchos sabores:
+
+![](static/img/charts.gif)
+
+----
+
+Cosas importantes sobre visualización de datos:
+
+- Lleva información, es un mensaje
+- Ejercicio mental para interpretar o _decodificar_(!!) información
+- No siempre es el fin
+- Herramienta exploratoria
+- Distintas visualizaciones en mismos datos / Distintas historias
+
+----
+
+```{r}
+data(gapminder, package = "gapminder")
+
+gapminder %>% 
+  distinct(country, continent) %>% 
+  count(continent) %>% 
+  ggplot() +
+  geom_col(aes(continent, n, fill = continent), width = 0.5) + 
+  scale_fill_viridis(option = "D", discrete = TRUE, guide = FALSE) +
+  labs(
+    title = "Africa tiene más países que el resto de continentes",
+    subtitle = "Un interesante subtitulo para contexto y dar detalles quizás puede ser\nmás largo pero quien soy yo para decir que se debe y lo que no",
+    caption = "Importante mencionar la fuente, en caso contrario no me creen",
+    x = "Contienentes",
+    y = "Países"
+    ) + 
+  theme(plot.subtitle = element_text(size = 9))
+```
+
+----
+
+```{r}
+gapminder %>% 
+  group_by(country) %>% 
+  filter(row_number() == n()) %>% 
+  ungroup() %>% 
+  ggplot() + 
+  geom_point(aes(lifeExp, gdpPercap, size = pop, color = continent), alpha = 0.7) +
+  scale_color_viridis_d(option = "A") + 
+  scale_y_sqrt(name = "GDP per Capita", labels = comma, limits = c(NA, NA)) +
+  scale_x_continuous(name = "Esperanza de vida", labels = comma, limits = c(NA, NA)) +
+  scale_size(labels = comma, range = c(3, 10), breaks = c(100, 1000, 2000)*1e6) +
+  labs(title = "Esperanza de vida y GDP per capita ")
+```
+
+----
+
+```{r}
+data(legosets , package = "lego")
+ggplot(legosets) + 
+  geom_point(aes(Pieces, USD_MSRP, size = Minifigures, color = Year), alpha = 0.7) +
+  scale_color_viridis(option = "A") + 
+  scale_y_sqrt(name = "Precio USD", labels = dollar, limits = c(0, 300)) +
+  scale_x_sqrt(name = "Piezas", labels = comma, limits = c(0, 2000)) +
+  labs(title = "Precios según piezas")
+```
+
+----
+
+```{r}
+legosets %>% 
+  mutate(year2 = floor(Year/10)*10) %>% 
+  select(year2, Year, everything()) %>% 
+  ggplot() +
+  geom_jitter(aes(factor(year2), USD_MSRP, size = Pieces, color = Year), alpha = 0.5, width = 0.25) +
+  scale_color_viridis(option = "A") + 
+  scale_y_continuous(name = "Precio USD", labels = dollar, limits = c(0, 300)) + 
+  scale_x_discrete(name = "Década") +
+  labs(title = "Precios/Década")
+```
+
+----
+
+```{r}
+# install.packages(c("rgexf", "ggnetwork", "intergraph"))
+# 316
+library(tidyverse)
+library(viridis)
+library(igraph)
+library(rgexf)
+library(stringr)
+library(ggnetwork)
+library(ggrepel)
+
+net <- "http://media.moviegalaxies.com/gexf/92.gexf" %>% 
+  read_lines() %>% 
+  read.gexf() %>% 
+  gexf.to.igraph()
+
+V(net)$name <- str_to_title(V(net)$name)
+V(net)$label <- V(net)$name %>% 
+  str_extract_all("^\\w{2}| \\w") %>% 
+  map_chr(function(x) {
+    x %>% unlist() %>% str_c(collapse = "")
+  })
+V(net)$size <- page.rank(net)$vector
+cl <- cluster_fast_greedy(net)
+V(net)$comm <- membership(cl)
+
+f <- colorRamp(viridis::inferno(10))
+c <- (V(net)$comm/max(V(net)$comm)) %>% f() %>% {./255} %>% rgb()
+V(net)$color <- c
+
+# head(ggnetwork(net))
+set.seed(123)
+ggnet <- ggnetwork(net)
+dfnet2 <- ggnet %>%
+  as.matrix() %>%
+  as.data.frame() %>%
+  tbl_df() %>%
+  select(x, y, vertex.names, weight, size) %>%
+  mutate_all(as.character) %>%
+  mutate_at(vars(x, y, weight, size), as.numeric) %>%
+  filter(is.na(weight))
+
+ggplot(ggnet) + 
+  geom_edges(aes(x, y, size = width, color = factor(comm),
+           xend = xend, yend = yend), color = "gray", size = 1, alpha = 0.4) +
+  geom_point(aes(x, y, size = size, color = factor(comm))) +
+  geom_text_repel(aes(x, y, label = vertex.names, size = size),
+                  data = dfnet2, color = "#666666",
+                  family = "Roboto Condensed") +
+  scale_color_viridis(discrete = TRUE) + 
+  theme_blank() +
+  labs(size = "Importancia", color = "Grupo")
+```
+
+## Ejercicio
+
+¿Existe el mejor gráfico? ¿Cuál de las siguientes formas funciona mejor con el títutlo?
+
+__La región del sur exhibe el mayor crecimiento__
+
+<br>
+<small>
+Adapatado del tweet de [Lisa Charlotte Rost](https://twitter.com/lisacrost/status/948233069110222848)
+que a su vez está viene del ejemplo del libro "Show me the numbers" de Stephen Few
+</small>
+</span>
+
+----
+
+Los datos:
+
+```{r}
+library(readxl)
+data1 <- read_excel("data/muestrame_los_numeros.xlsx") %>% 
+  mutate(region = factor(region, levels = c("sur", "norte", "este", "oeste")))
+titulo <- "La región del sur exhibe el mayor crecimiento"
+data1 %>% 
+  spread(cuarto, valor) %>% 
+  arrange(region) %>% 
+  knitr::kable()
+```
+
+----
+
+Opción #1
+
+```{r}
+p1 <- ggplot(data1) +
+  geom_col(aes(cuarto, valor, group = region, fill = region),
+           color = "gray80", position = "dodge") +
+  scale_fill_viridis_d(option = "B", end = 0.90)
+p1 + labs(title = titulo)
+```
+
+----
+
+Opción #2
+
+```{r}
+p2 <- ggplot(data1) +
+  geom_col(aes(region, valor, group = cuarto, fill = region),
+           color = "gray80", position = "dodge") +
+  scale_fill_viridis_d(option = "B", end = 0.90)
+p2 + labs(title = titulo)
+```
+
+----
+
+```{r}
+p3 <- data1 %>% 
+  mutate(ind = as.numeric(region == "sur")) %>%
+  ggplot() +
+  geom_line(aes(cuarto, valor, group = region, alpha = ind, color = region), size = 2.5) +
+  scale_y_continuous(limits = c(0, NA)) + 
+  scale_alpha(range = c(0.5, 1), guide = FALSE) +
+  scale_color_viridis_d(option = "B", end = 0.90)
+p3 + labs(title = titulo)
+```
+
+----
+
+<br>
+
+```{r, fig.width=12}
+gridExtra::grid.arrange(
+  p1 + theme(axis.text.y = element_blank(), legend.position="none"),
+  p2 + theme(axis.text.y = element_blank(), legend.position="none"),
+  p3 + theme(axis.text.y = element_blank(), legend.position="none"),
+  nrow = 1)
+```
+
+----
+
+(Posible) Respuesta
+
+__No. Dependerá de tu mensaje, de tu historia.__
+
+# Recomendaciones Técnicas <br> y algunas Misceláneas { .center .white data-background="#75AADB" }
+
+## Pie Charts (o tortas)
+
+<!-- https://twitter.com/MetricsHulk/status/728014668913102848 -->
+<img src="https://pbs.twimg.com/media/Chpte5BVEAA-ppy.jpg" width="80%"/>
+
+----
+
+Usuales dificultades
+
+- Compara áreas
+- Ejercicio mental de rotar para comparar categorías
+
+----
+
+Es muy usado es el __pie chart__
+
+```{r}
+legos2 <- legosets %>% 
+  mutate(Theme2 = fct_lump(Theme, n = 7)) %>% 
+  filter(Theme2 != "Other")
+  
+p1 <- ggplot(legos2) +
+  geom_bar(aes(Theme, fill = Theme)) +
+  scale_fill_viridis(discrete = TRUE, option = "B", end = 0.7) +
+  theme_null() + 
+  xlab(NULL) + ylab(NULL)
+
+p2 <- ggplot(legos2) +
+  geom_bar(aes(x = factor(1), fill = Theme), width = 1) +
+  scale_fill_viridis(discrete = TRUE, option = "B", end = 0.7) +
+  coord_polar(theta = "y") +
+  theme_null()
+
+gridExtra::grid.arrange(p1, p2, nrow = 1)
+```
+
+----
+
+Es muy (__ab__)usado es el __pie chart__
+
+```{r}
+legos3 <- legosets %>% 
+  mutate(Theme2 = fct_lump(Theme, n = 15)) %>% 
+  filter(Theme2 != "Other")
+
+p1 <- ggplot(legos3) +
+  geom_bar(aes(Theme, fill = Theme)) +
+  scale_fill_viridis(discrete = TRUE, option = "B") +
+  theme_null() + 
+  xlab(NULL) + ylab(NULL)
+
+p2 <- ggplot(legos3) +
+  geom_bar(aes(x = factor(1), fill = Theme), width = 1) +
+  scale_fill_viridis(discrete = TRUE, option = "B") +
+  coord_polar(theta = "y") +
+  theme_null()
+
+gridExtra::grid.arrange(p1, p2, nrow = 1)
+```
+
+----
+
+<img src="static/img/omgpie.gif" width="80%">
+
+## Puntos de Referencia
+
+----
+
+<br>
+![](static/img/pinera.jpg)
+
+----
+
+<br>
+![](static/img/pinera2.jpg)
+
+----
+
+```{r}
+data2 <- data_frame(
+  indice = c(30.7, 22.8, 27.3),
+  tiempo = c(2010, 2013, 2016),
+  c = c("r", "b", "r")
+)
+
+ggplot(data2, aes(factor(tiempo), indice)) + 
+  geom_col(aes(fill = c), width = 0.65) +
+  geom_text(aes(label = paste0(indice, "%")), color = "white", size = 5, vjust = 2) +
+  scale_fill_manual(values = c("navy", "darkred")) +
+  labs(x = "Año", y = "Índice") + 
+  theme(axis.text.y = element_blank(), legend.position="none")
+```
+
+## Convenciones
+
+Ejercicio 2. Encuentre las _anomalías_
+
+<!-- https://twitter.com/MetricsHulk/status/735913911212515329 -->
+<img src="https://pbs.twimg.com/media/CjZ9zUjWUAAkWEt.jpg" width="40%" />
+
+----
+
+Rápidamente ¿Dónde se produce el máximo?
+
+<img src="static/img/gun.jpg" width="40%" />
+
+## Tipografía
+
+¿Conocen a ...?
+
+<span class="fragment"><h1><font face="Arial">Arial</font></h1></span>
+<span class="fragment"><h1><font face="Times New Roman">Times New Roman</font></h1></span>
+<span class="fragment"><h1><font face="Comic Sans MS">Comic Sans</font></h1></span>
+
+----
+
+![](static/img/comicsanscriminal.png)
+
+----
+
+Según <font face="Comic Sans MS">[comic sans criminal](http://www.comicsanscriminal.com/)</font>:
+
+- Fuentes tienen personalidad
+- Tiene un propósito
+- Armonía en el universo
+
+## Colores
+
+La misma idea de las convenciones!
+
+<h1><big><strong>
+1 2 3 <span style="color:red">4</span> 5 6
+</strong></big></h1>
+
+- Dar foco y llamar la atención
+- Debiesen ser corcondantes con el dato
+
+----
+
+```{r}
+df <- data_frame(
+  pais = c("Chile", "Colombia", "Argentina", "Bolivia"),
+  crecimiento = c(6, 5, 4, 4)/10
+) %>% 
+  mutate(pais = fct_inorder(pais))
+
+ggplot(df) +
+  geom_col(aes(pais, crecimiento, fill = pais), width = 0.5) + 
+  scale_y_percent() +
+  scale_fill_manual(values = sample(c("#C8152B", "#FDD116", "#4F75AF", "#2C9A05"))) +
+  theme(legend.position = "none")
+```
+
+----
+
+```{r}
+# ggplot(df) +
+#   geom_col(aes(pais, crecimiento, fill = pais), width = 0.5) + 
+#   scale_y_percent() +
+#   scale_fill_manual(values = c("#C8152B", "#FDD116", "#4F75AF", "#2C9A05")) +
+#   theme(legend.position = "none")
+ggplot(df) +
+  geom_col(aes(pais, crecimiento, fill = pais), width = 0.5) +
+  scale_y_percent() +
+  scale_fill_manual(values = c("#C8152B", "#555555", "#555555", "#555555")) +
+  theme(legend.position = "none")
+```
+
+----
+
+```{r}
+ggplot(legosets) + 
+  geom_point(aes(Pieces, USD_MSRP, size = Minifigures, color = Year), alpha = 0.7) +
+  scale_color_viridis(option = "A") + 
+  scale_y_sqrt(name = "Precio USD", labels = dollar, limits = c(0, 300)) +
+  scale_x_sqrt(name = "Piezas", labels = comma, limits = c(0, 2000)) +
+  labs(title = "Precios según piezas")
+```
+
+----
+
+```{r}
+legosets %>% 
+  mutate(Themesw = Theme == "Star Wars") %>% 
+  ggplot() + 
+  geom_point(aes(Pieces, USD_MSRP, size = Minifigures, color = Themesw), alpha = 0.7) +
+  scale_color_manual(guide = "none", values = c("gray90", "darkred")) + 
+  scale_y_sqrt(name = "Precio USD", labels = dollar, limits = c(0, 300)) +
+  scale_x_sqrt(name = "Piezas", labels = comma, limits = c(0, 2000)) +
+  labs(title = "Precios según piezas")
+```
+
+
+## Etiquetas
+
+----
+
+```{r}
+gapminder %>% 
+  group_by(country) %>% 
+  filter(row_number() == n()) %>% 
+  ungroup() %>% 
+  ggplot() + 
+  geom_point(aes(lifeExp, gdpPercap, size = pop, color = continent), alpha = 0.7) +
+  scale_color_viridis_d(option = "A") + 
+  scale_y_sqrt(name = "GDP per Capita", labels = comma, limits = c(NA, NA)) +
+  scale_x_continuous(name = "Esperanza de vida", labels = comma, limits = c(NA, NA)) +
+  scale_size(labels = comma, range = c(3, 10), breaks = c(100, 1000, 2000)*1e6) +
+  labs(title = "Esperanza de vida y GDP per capita ")
+```
+
+----
+
+```{r}
+gapminder %>% 
+  group_by(country) %>% 
+  filter(row_number() == n()) %>% 
+  ungroup() %>% 
+  ggplot() + 
+  geom_point(aes(lifeExp, gdpPercap, size = pop, color = continent), alpha = 0.7) +
+  geom_label(aes(lifeExp, gdpPercap, label = country, size = pop, color = continent), alpha = 0.7) +
+  scale_color_viridis_d(option = "A") + 
+  scale_y_sqrt(name = "GDP per Capita", labels = comma, limits = c(NA, NA)) +
+  scale_x_continuous(name = "Esperanza de vida", labels = comma, limits = c(NA, NA)) +
+  scale_size(labels = comma, range = c(3, 10), breaks = c(100, 1000, 2000)*1e6) +
+  labs(title = "Esperanza de vida y GDP per capita ")
+```
+
+----
+
+```{r}
+library(ggrepel)
+gapminder %>% 
+  group_by(country) %>% 
+  filter(row_number() == n()) %>% 
+  ungroup() %>% 
+  ggplot() + 
+  geom_point(aes(lifeExp, gdpPercap, size = pop, color = continent), alpha = 0.7) +
+  geom_label_repel(aes(lifeExp, gdpPercap, label = country, size = pop, color = continent), alpha = 0.7) +
+  scale_color_viridis_d(option = "A") + 
+  scale_y_sqrt(name = "GDP per Capita", labels = comma, limits = c(NA, NA)) +
+  scale_x_continuous(name = "Esperanza de vida", labels = comma, limits = c(NA, NA)) +
+  scale_size(labels = comma, range = c(3, 10), breaks = c(100, 1000, 2000)*1e6) +
+  labs(title = "Esperanza de vida y GDP per capita ")
+```
+
+----
+
+```{r}
+gp2 <- gapminder %>% 
+  group_by(country) %>% 
+  filter(row_number() == n()) %>% 
+  ungroup() %>% 
+  sample_n(10)
+
+gapminder %>% 
+  group_by(country) %>% 
+  filter(row_number() == n()) %>% 
+  ungroup() %>% 
+  ggplot() + 
+  geom_point(aes(lifeExp, gdpPercap, size = pop, color = continent), alpha = 0.7) +
+  geom_label_repel(aes(lifeExp, gdpPercap, label = country), color = "gray40", data = gp2, force = 100) +
+  scale_color_viridis_d(option = "A") + 
+  scale_y_sqrt(name = "GDP per Capita", labels = comma, limits = c(NA, NA)) +
+  scale_x_continuous(name = "Esperanza de vida", labels = comma, limits = c(NA, NA)) +
+  scale_size(labels = comma, range = c(3, 10), breaks = c(100, 1000, 2000)*1e6) +
+  labs(title = "Esperanza de vida y GDP per capita ")
+```
+
+
+# Visualizando con ggplot2  { .center .white data-background="#75AADB" }
+
+## ggplot2
+
+Características:
+
+- Paquete para visualizar datos mediante capas
+- Es muy poderoso y flexible
+- Se carga junto al `tidyverse`
+- No es la única opción en R para graficar
+
+## Datos
+
+```{r}
+theme_set(theme_gray())
+```
+
+```{r, echo=TRUE}
+library(gapminder)
+data(gapminder)
+paises <- gapminder %>% 
+  filter(year == max(year))
+paises
+```
+
+## Creando un gráfico :)
+
+```{r, echo=TRUE,  fig.height = 4}
+ggplot(data = paises)
+```
+
+## Mejorando un gráfico
+
+```{r, echo=TRUE,  fig.height = 4}
+ggplot(data = paises) + 
+  geom_point(mapping = aes(x = lifeExp, y = gdpPercap))
+```
+
+## Que sucedió?
+
+```r
+ggplot(data = paises) + 
+  geom_point(mapping = aes(x = lifeExp, y = gdpPercap))
+```
+
+<small>
+
+- `ggplot()` crea un sistema de coordenadas al cual se pueden agregar capas
+- `ggplot(data = paises)` da un grafico vacío pues no agregamos capas
+- `geom_point()` agrega una capa de puntos al gráfico usando las filas de `paises`
+- Cada función `geom_algo` tiene un argumento de mapping que define cómo se asignan o se “mapean” las variables del conjunto de datos a propiedades visuales del `geom_algo`
+-  El argumento de mapping siempre aparece emparejado con `aes()`, y los argumentos `x` e `y` especifican qué variables asignar a los ejes `x` e `y`
+
+</small>
+
+----
+
+Podemos setear  las propiedades estéticas de tu geom manualmente:
+
+```{r, echo=TRUE,  fig.height = 4}
+ggplot(data = paises) + 
+  geom_point(mapping = aes(x = lifeExp, y = gdpPercap), color = "blue")
+```
+
+---- 
+
+En este caso un punto no solo puede poseer x e y, puede tener tamaño dado
+por una variable
+
+```{r, echo=TRUE,  fig.height = 4}
+ggplot(data = paises) + 
+  geom_point(mapping = aes(x = lifeExp, y = gdpPercap, size = pop), color = "blue")
+```
+
+---- 
+
+Quizás en lugar de setar color fijo, podemos asignarlo segun una variable
+
+```{r, echo=TRUE,  fig.height = 4}
+ggplot(data = paises) + 
+  geom_point(mapping = aes(x = lifeExp, y = gdpPercap, size = pop, color = continent))
+```
+
+---- 
+
+O realizar _facets_/paneles
+
+```{r, echo=TRUE,  fig.height = 4}
+ggplot(data = paises) + 
+  geom_point(mapping = aes(x = lifeExp, y = gdpPercap, size = pop)) +
+  facet_wrap(vars(continent))
+```
+
+## Ejercicios 
+
+Revisemos el archivo `04-script-visualizacion-datos.R`

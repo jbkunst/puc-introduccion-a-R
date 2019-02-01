@@ -1,0 +1,133 @@
+---
+title: false
+pagetitle: 'Computación estadística con R'
+author: false
+output:
+  revealjs::revealjs_presentation:
+    lib_dir: static
+    self_contained: false
+    reveal_plugins: ["zoom"]
+    mathjax: null
+    transition: fade
+    css: ["static/css/styles.css"]
+    incremental: true
+    center: false
+    theme: simple
+    fig_width: 6
+    fig_height: 3.5
+    reveal_options:
+      slideNumber: false
+      controls: false
+      mouseWheel: false
+editor_options: 
+  chunk_output_type: console
+---
+
+# Computación Estadística con R<br>Facultad de Matemáticas PUC<br><small>Joshua Kunst, 2018</small>{ .center .white data-background="#75AADB" }
+
+```{r, include = FALSE}
+source("R/setup.R")
+knitr::opts_chunk$set(fig.path = "static/img/02/")
+```
+
+## Programa
+
+- Bienvenida, R, Instalación, Entorno
+- Lectura de datos. Manipulación de datos
+- Manipulación de datos
+- Visualización
+- Recap. Análisis Exploratorio de Datos (AED)
+- Inferencia Estadística
+- Regresión Lineal, Logística. Árboles de Decisión
+- Reportes
+
+## Clases
+
+- Cada clase tendrá una parte expositiva (25%)
+- Describiremos objetivos, funciones, ejemplos, links de interés. 
+- El restante (90%) es enfocado en *aprender haciendo*.
+- Se que no suma 100%. Pero es *muy* importante ejercitar.
+- **Todos** escribiremos código. Cometeremos errores y los corregiremos. *hechando a prender se aprende*
+- Todo el material estará en http://www.diplomados.uc.cl/acceso.php
+
+## Material
+
+- Primeros pasos de Riva Quiroga: https://github.com/rivaquiroga/RLadies-Santiago/blob/master/2018-04_taller_primeros_pasos_en_R.Rmd
+- R para Ciencia de Datos: http://r4ds.had.co.nz/ y http://es.r4ds.hadley.nz/
+
+Revisamos http://jkunst.com/intro-r-workshop/ para motivarlos?
+
+# Instalando R y RStudio { .center .white data-background="#75AADB" }
+
+## Descarga e Instalación
+
+- R es el motor
+- R se descarga de https://cran.r-project.org/bin/windows/base/
+- Rstudio es el panel de control
+- Rstudio se descarga de https://www.rstudio.com/products/rstudio/download/#download
+- La instalación es estándar (click click click)
+- Si nada funciona: Versión cloud https://rstudio.cloud/
+
+## Descarga 
+
+Si nos olvidamos de lo anterior. Recuerden
+
+http://es.lmgtfy.com/?q=r+cran+descargar
+
+y
+
+http://es.lmgtfy.com/?q=rstudio+descargar
+
+
+# Usando R y RStudio { .center .white data-background="#75AADB" }
+
+---- 
+
+Simplemente abrimos RStudio que internamente usará R
+
+<img src="static/img/rstudio.png" alt="Rstudio" width="60%">
+
+<small>http://edild.github.io/qetxrbook/rintro/rstudio.html</small>
+
+## Los primeros pasos
+
+- La mayor parte será en un __script__ que contendrá nuestros comandos
+- Los resultados de nuestras instrucciones aparecerán en la __consola__
+- Si realizamos gráficos estos aparecerán en __plots__
+- Los datos que vayamos cargando, creando, modificando aparecenrán en
+__enviorment__ (ambiente)
+
+## Ejercicio - El segundo paso
+
+- Abrir RStudio
+- File (archivo) -> New File (nuevo archivo) -> R Script
+- Escribir en el script `x <- c(12, 45, 67,45, 234, 45)` y ejecutar (`CTRL + R`)
+- Escribir y ejectutar `mean(x)` y `plot(x)`
+
+---- 
+
+```{r, echo=TRUE, fig.height=3, fig.width=6}
+x <- c(12, 45, 67,45, 234, 45)
+mean(x)
+plot(x)
+```
+
+## Tercer paso - Paquetes
+
+- Paquetes son conjunto de funciones que extienden la funcionalidad de R
+- Para poder usarlas debemos antes instalarlas mediante la función `install.package`. Ejemplo/Ejercicio
+`install.package("tidyverse")`
+- Luego ya instalada, __no siempre__ la necesitaré. En caso de necesitarla, la cargo para usarla 
+en nuestra sesión con la función `library`. Ejemplo/Ejercicio `library(readxl)`
+
+Resumen. En un computador debemos instalar __una__ vez el paquete, y cargar el paquete las veces
+que los requiramos.
+
+
+## Tidyverse
+
+Es un conjunto de paquetes que funcionan en conjunto:
+
+- Para importar datos
+- Manipularlos
+- Visualizarlos

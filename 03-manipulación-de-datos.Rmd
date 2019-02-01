@@ -1,0 +1,289 @@
+---
+title: false
+pagetitle: 'Computación estadística con R'
+author: false
+output:
+  revealjs::revealjs_presentation:
+    lib_dir: static
+    self_contained: false
+    reveal_plugins: ["zoom"]
+    mathjax: null
+    transition: fade
+    css: ["static/css/styles.css"]
+    incremental: true
+    center: false
+    theme: simple
+    fig_width: 6
+    fig_height: 3.5
+    reveal_options:
+      slideNumber: false
+      controls: false
+      mouseWheel: false
+editor_options: 
+  chunk_output_type: console
+---
+
+# Computación Estadística con R<br>Manipulación de Datos<br><small>Joshua Kunst, 2018</small>{ .center .white data-background="#75AADB" }
+
+```{r, include = FALSE}
+source("R/setup.R")
+knitr::opts_chunk$set(fig.path = "static/img/03/", echo = TRUE)
+```
+
+# Manejo de Datos { .center .white data-background="#75AADB" }
+
+## Antes el %>% 
+
+Ir a RStudio. Yay!
+
+## Importar datos
+
+```{r}
+library(tidyverse)
+storms <- read_csv("data/storms.csv")
+storms
+```
+
+----
+
+```{r}
+pollution <- read_csv("data/pollution.csv")
+pollution
+```
+
+## `filter` Seleccionar Filas
+
+![](static/img/dplyr/filter.png)
+
+## `filter` Ejemplo 
+
+![](static/img/dplyr/filter_example.png)
+
+## `filter` Código
+
+```
+filter(storms, storm %in% c("Alberto", "Ana"))
+```
+
+```{r}
+storms %>% 
+  filter(storm %in% c("Alberto", "Ana"))
+```
+
+## `select` Seleccionar Columnas
+
+![](static/img/dplyr/select.png)
+
+## `select` Ejemplo 
+
+![](static/img/dplyr/select_example.png)
+
+## `select` Código
+
+```
+select(storms, storm, pressure)
+```
+```{r}
+storms %>% 
+  select(storm, pressure)
+```
+
+----
+
+Versión alternativa
+
+```{r}
+storms %>% 
+  select(-wind, -date)
+```
+
+
+## `arrange` Ordenar Filas
+
+![](static/img/dplyr/arrange.png)
+
+## `arrange` Ejemplo 
+
+![](static/img/dplyr/arrange_example.png)
+
+## `arrange` Código
+
+```
+arrange(storms, wind)
+```
+
+```{r}
+storms %>% 
+  arrange(wind)
+```
+
+## `mutate` Crear/Modificar columnas
+
+![](static/img/dplyr/mutate.png)
+
+## `mutate` Ejemplo 
+
+![](static/img/dplyr/mutate_example.png)
+
+## `mutate` Código
+
+```
+mutate(storms, ratio = pressure/wind, inverse = 1/ratio)
+```
+```{r}
+storms %>% 
+  mutate(ratio = pressure/wind, inverse = 1/ratio)
+```
+
+## `summarize` Resumir Columnas
+
+![](static/img/dplyr/summarize.png)
+
+## `summarize` Ejemplo 
+
+![](static/img/dplyr/summarize_example.png)
+
+## `summarise` Código
+
+```
+summarise(pollution, median = median(amount))
+```
+
+```{r}
+pollution %>% 
+  summarise(median = median(amount))
+```
+
+## `group_by` + `summarize` Resumir Columnas por Grupos
+
+![](static/img/dplyr/group_by_summarize.png)
+
+## `group_by` + `summarize` Ejemplo 
+
+![](static/img/dplyr/group_by_summarize_example.png)
+
+## `group_by` + `summarise` Código
+
+```{r}
+pollution %>%
+  group_by(city) %>% 
+  summarise(
+    promedio = median(amount),
+    suma = sum(amount),
+    n = n()
+    )
+```
+
+## Ejercicios { .center }
+
+Revisemos el archivo `03-script-manipulacion-datos-01.R`
+
+Con el archivo de http://datos.gob.cl/dataset/28198
+
+- ¿Cuatos registros y filas tiene la tabla?
+- ¿Cual es la comuna con mas puntos BIP!?
+- ¿Cual es la entidad/comuna menos repetida?
+- ¿Cuantos centros BIP existen en La Florida?
+
+
+# Manejo de Datos 2 { .center .white data-background="#75AADB" }
+
+
+## Importar datos
+
+
+```{r}
+songs <- read_csv("data/songs.csv")
+songs
+```
+
+----
+
+```{r}
+artists <- read_csv("data/artists.csv")
+artists
+```
+
+## `left_join` Juntar tablas
+
+![](static/img/dplyr/left_join.png)
+
+## `left_join` Código
+
+
+```{r}
+left_join(songs, artists, by = "name")
+```
+
+
+## Importar datos 2
+
+```{r}
+library(tidyverse)
+data("table4a")
+table4a
+```
+
+----
+
+```{r}
+data("table2")
+table2
+```
+
+----
+
+```{r}
+cases <- read_csv("data/cases.csv")
+cases
+```
+
+¿Como obtendríamos el promedio por país?
+
+## ¿Como obtendríamos el promedio por país?
+
+```{r}
+cases %>% 
+  mutate(promedio = (`2011` + `2012` + `2013`)/3)
+```
+
+Ahora pensemos en una tabla más grande, con más años 
+
+## `gather` Recolectar 
+
+Coloca nombres de columnas en una variable (columna) __key__, recolectando los 
+valores (__value__) de las columnas en un __sola__ columna
+
+![](static/img/tidyr/gather.png)
+
+## `gather` Ejemplo 
+
+![](static/img/tidyr/gather_example.png)
+
+## `gather` Código
+
+```{r}
+gather(table4a, `1999`, `2000`, key = "year", value = "cases")
+```
+
+
+## `spread` Esparcir
+
+Esparce un par de columnas (2, key-value) en multiples columnas 
+
+![](static/img/tidyr/spread.png)
+
+## `spread` Ejemplo 
+
+![](static/img/tidyr/spread_example.png)
+
+## `spread` Código
+
+
+```{r}
+spread(table2, type, count)
+```
+
+## Ejercicios { .center }
+
+Revisemos el archivo `03-script-manipulacion-datos-02.R`

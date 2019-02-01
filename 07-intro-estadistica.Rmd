@@ -1,0 +1,295 @@
+---
+title: false
+pagetitle: 'Computación estadística con R'
+author: false
+output:
+  revealjs::revealjs_presentation:
+    lib_dir: static
+    self_contained: false
+    reveal_plugins: ["zoom"]
+    mathjax: null
+    transition: fade
+    css: ["static/css/styles.css"]
+    incremental: true
+    center: false
+    theme: simple
+    fig_width: 6
+    fig_height: 3.5
+    reveal_options:
+      slideNumber: false
+      controls: false
+      mouseWheel: false
+editor_options: 
+  chunk_output_type: console
+---
+
+# Computación Estadística con R<br>Introducción a la Estadística<br><small>Joshua Kunst, 2018</small>{ .center .white data-background="#75AADB" }
+
+```{r, include = FALSE}
+source("R/setup.R")
+knitr::opts_chunk$set(fig.path = "static/img/07/", echo = FALSE, cache = TRUE)
+```
+
+## Definiciones
+
+- Estadística. Rama matemática que estudia observaciones/mediciones de una población; usualmente de una muestra
+- Población. Conjunto de individuos, elementos de interés
+- Muestra. Una parte (subconjunto) de la población
+- Muestreo. Proceso de selección de la muestra (algoritmo)
+- Unidad de Muestreo. Es uno o más elementos de la población. El total constituyen la población
+
+## Ejercicio Motivacional
+
+```{r, echo=FALSE}
+N <- 20
+n <- 5
+set.seed(123)
+x <- sample(1:10, size = N, replace = TRUE, prob = 1:10)
+x <- sort(x)
+```
+
+- Tenemos una tienda y cierta cantidad de clientes, digamos `r N` (**problación**)
+- Estamos preocupado de conocer la satisafacción promedio de nuestros clientes (**parámetro de interés**) 
+- Por dinero y tiempo (= dinero) podemos hacer solo `r n` llamadas (**unidad de muestreo**)
+
+---
+
+Las `r N` _satifacciones_ en escala de 1 a 10 son las siguientes en cierto orden:
+
+```{r results='asis'}
+cat(paste(x, collapse = ", "))
+```
+
+Por tanto nuestra la satisfacción promedio de nuestros clientes es `r mean(x)`
+
+**No las conocemos**
+
+
+---
+
+**Dimensión paralela 1**
+
+Supongamos que seleccionamos los primeros de nuestra lista por comodidad (**Proceso de muestreo**)
+
+
+```{r results='asis'}
+cat(head(x, n))
+```
+
+Y así nuestro satisfacción promedio de satisfacción en la muestra es `r mean(head(x, n))`
+
+---
+
+**Dimensión paralela 2**
+
+Supongamos que seleccionamos los últimos de nuestra lista por que nuestra tienda es _Les Contreras_
+
+
+```{r results='asis'}
+cat(tail(x, n))
+```
+
+Y así nuestro satisfacción promedio de satisfacción en la muestra es `r mean(tail(x, n))`
+
+---
+
+¿Cuál es la dimesión correcta?
+
+Las dimensiones 1 y 2 comete el error de sesgo por selección 
+
+https://www.youtube.com/watch?v=p52Nep7CBdQ
+
+
+Entonces ¿qué hacer?
+
+
+## Tipos de Estadística
+
+Descriptiva e Inferencial
+
+<img src="static/img/types.png">
+
+## Tipos de Estadística
+
+<img src="static/img/stats_process.gif">
+
+# Estadística Descriptiva { .center .white data-background="#75AADB"}
+
+## Estadística Descriptiva
+
+Conjunto de procedimientos para __resumir__ datos
+
+- Medidas de tendencia central y dispersión<span class="fragment">. No solo basta con ver que valores puede tomar una variable<span>
+- Visualización de datos<span class="fragment">. Distintos gráficos nos cuentan diferente información acerca de la variable(s)<span>
+
+<span class="fragment">__Sintetizar información__<span>
+
+## Medidas de Tendencia y Dispersión
+
+Son indicadores (generalmente un número) obtenidos de los datos 
+que __resumen__ información y nos hablan de alguna característica de 
+la __distribución__ de la variable
+
+<span class="fragment">Nos ayudan a tener una idea más fina en __donde se concentran__
+las variables y que __tan concentrados__ están los valores</span>
+
+## Medidas de Tendencia Central
+
+Nos señalan el valor en _torno al cual se concentran los datos_
+
+>- __Media__ o __Promedio__: La suma de los datos dividido por la cantidad de los mismos
+>- Mediana: Es el valor que está al medio cuando los datos se ordenan
+>- Moda: Es el valor que más se repite. Este se usa cuando la variable es _discreta_
+
+## Medidas de Dispersión
+
+Son valores que nos describen la dispersión de los datos. Es decir, __que tan concentrados__ están:
+
+>- __Desviación estándar__: Mide el grado de dispersión en torno a la media
+>- Rango: Es el tamaño del intervalo que cubren los datos, el mayor valor menos el mínimo
+>- Quantiles: Valores donde se acumula % de información
+
+## Ejercicio
+
+Supongamos que debemos decidir en curso debe ir nuestro hijo/sobrino/simil, entre el 
+curso __narnajo__ o __azul__. Nos dicen que el promedio de notas finales del año anterior
+para cada curso fue.
+
+
+```{r}
+set.seed(123)
+
+N <- 50
+curso2 <- rgamma(N, scale = 6.5, shape = 1)
+curso2 <- curso2 + rnorm(N)*2
+curso2 <- ifelse(curso2 < 4, 4, curso2)
+curso2 <- ifelse(curso2 > 7, 7, curso2)
+
+curso1 <- rnorm(50, mean = mean(curso2) - 0.2, sd = 0.25)
+curso1 <- ifelse(curso1 < 4, 4, curso1)
+curso1 <- ifelse(curso1 > 7, 7, curso1)
+
+# summary(curso1)
+# hist(curso1, breaks = 10)
+df <- data_frame(
+  curso = rep(c("azul", "naranjo"), each = N),
+  nota = c(curso2, curso1)
+)
+
+df %>% 
+  group_by(curso) %>% 
+  summarise(
+    cantidad_de_alumnos = n(),
+    promedio = mean(nota)
+    ) %>%
+  mutate_if(is.numeric, round, 2) %>% 
+  knitr::kable()
+```
+
+---- 
+
+Más información:
+
+```{r}
+df %>% 
+  group_by(curso) %>% 
+  summarise(
+    cantidad_de_alumnos = n(),
+    promedio = mean(nota),
+    maxima_nota = max(nota)
+    ) %>%
+  mutate_if(is.numeric, round, 2) %>% 
+  knitr::kable()
+```
+
+----
+
+```{r}
+ggplot(df) + 
+  geom_histogram(aes(nota, fill = curso)) + 
+  facet_wrap(vars(curso)) + 
+  scale_fill_viridis_d(begin = .2, end = .8, option = "B") 
+```
+
+----
+
+Quizás un poco más de información ayuda
+
+```{r}
+df %>% 
+  group_by(curso) %>% 
+  summarise(
+    cantidad_de_alumnos = n(),
+    promedio = mean(nota),
+    desviacion_estandiar = sd(nota),
+    mediana = median(nota),
+    minimo = min(nota),
+    maximo = max(nota)
+    ) %>% 
+  gather(estadistico, valor, -curso) %>% 
+  spread(curso, valor) %>%
+  mutate_if(is.numeric, round, 2) %>% 
+  knitr::kable()
+```
+
+## Algunas frases
+
+- El promedio no vale mucho sin un indicador de variablidad
+- Guiarse por un valor solamente es usualmente peligroso para tomar de decisiones
+
+## Ejemplo Interactivo
+
+Revisar:
+
+https://rawgit.com/juba/uniquanti/master/index.html
+
+# Estadística Inferencial { .center .white data-background="#75AADB"}
+
+Antes revisar 07-script-estadistica.R
+
+## Intervalo de Confianza para la media
+
+Se asume que se tiene un vector numérico (posiblemente muestra) `x`. Se obtiene
+con el comando `t.test`. De esta forma si asumimos `d1 <- c(2, 2, 3, 3, 3)` Entonces:
+
+
+```{r, echo=TRUE}
+d1 <- c(2, 2, 3, 3, 3)
+t.test(d1)
+```
+
+----
+
+Mejor alternativa, es usar la función `tidy` del paquete `broom`:
+
+```{r, echo=TRUE}
+library(broom)
+d3 <- sample(x, size = 10)
+d3
+
+tidy(t.test(d3))
+
+tidy(t.test(d3, conf.level = .99))
+```
+
+## Intervalo de Confianza para la proporción
+
+En este caso, supongamos que deseamos estimar la proporción de un evento.
+
+Por ejemplo, de nuestra fábrica deseamos saber la tasa de productos defectuosos.
+Se obtiene una muestra de 1000 productos y 25 de ellos lo son. Si exist evidencia
+que la tasa es mayor o igual a 3% se destinaran gastos a remediar el problema.
+
+
+----
+```{r, echo=TRUE}
+binom.test(25, 1000)
+
+tidy(binom.test(25, 1000))
+```
+
+## Otro ejemplo interactivo
+
+https://istats.shinyapps.io/ExploreCoverage/
+
+

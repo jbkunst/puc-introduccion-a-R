@@ -1,0 +1,103 @@
+---
+title: "Clase 8 - Clase práctica"
+output:
+  html_document:
+    theme: paper
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+
+## Datos
+
+Trabajaremos con los siguientes datos:
+
+```{r}
+library(tidyverse)
+
+miembros <- read_csv("https://docs.google.com/spreadsheets/d/10Y3ZTLdZYFLepakSb2NzeN4ZZ_I2SpMVsgy98DGd_oA/export?format=csv&id=10Y3ZTLdZYFLepakSb2NzeN4ZZ_I2SpMVsgy98DGd_oA&gid=1401112230")
+glimpse(miembros)
+
+movimientos <- read_csv("https://docs.google.com/spreadsheets/d/1W-92D8z49CFqynp-nz-C_jGGvhB5np2sLObjaGWTqSk/export?format=csv&id=1W-92D8z49CFqynp-nz-C_jGGvhB5np2sLObjaGWTqSk&gid=1376337386")
+glimpse(movimientos)
+```
+
+## Generales
+
+- Explore las tablas, mírelas
+- ¿Los nombres reflejan el contenido de la columna asociada?
+- Cada variable tiene correcto el tipo de dato que representa
+
+
+## Seleccionar
+
+- Seleccione de la tabla miembros las variables organización y funcion
+- Seleccione de la tabla movimientos las variables actividad, comercio y hora, en el siguiente orden: hora, comercio, actividad
+
+## Filtrar
+
+- Obtenga el nombre de los analistas que trabajan en AFP de la tabla miembros.
+- Ontenga de la tabla miembros el nombre de los analistas y consultores que trabajan en Bancos y consultoras
+- De la tabla movimientos obtenga los registros que tienen un importe mayor a 10.000
+- Obtenga todas las transacciones realizadas en Banco
+
+## Mutar
+
+Para la tabla miembros:
+
+- Crear una variable llamada "tipo_institucion" que tome el valor 1 si trabaja en banco y el valor 0 si no. 
+
+Para la tabla movimientos:
+
+- Crear una variable que se llame "importe_clp" que sea igual al "importe por 640 pesos"
+- Crear una variable que se llame "importe_clf" que sea igual al "importe_clp divido en 27.000 pesos"
+- Crear un campo llamado "aemepeme" tal que si la compra fue realizada entre las 00:00:00 y las 11:59:59 tome el valor "am", de lo contrario "pm"
+
+## Ordenar
+
+- Ordene la tabla movimientos por importe de mayor a menor
+- Ordene la tabla movimientos por importe de menor a mayor
+- Ordene en la tabla miembros la variable nombre. 
+
+## Resumir
+
+- ¿Cuantás personas hay por organización y función de la tabla miembros?
+- ¿Cuánto importe acumula cada persona de la tabla movimientos? 
+- ¿Cuál es la hora promedio de compra de cada usuario?
+  
+## Combinación de Verbos. 
+
+- Encuentre importe acumulado y hora promedio de compras de cada persona de la tabla movimientos.
+- Encuentre el nombre de la persona que realizo la operación de mayor importe realizado en horario "pm"
+- ¿Qué comercios realizaron compras menores a 1 UF ? Escoja los 5 primeros
+- ¿Qué personas realizaron compras menores a 1 UF en horario pm? Escoja los 5 primeros
+
+## Joins
+
+- Obtenga las funciones de quienes realizaron los 5 movimientos de mayor  importe ¿Tiene sentido el resultado?
+- Agregue a la tabla movimientos, el campo de la organizaciòn de quien realizó el importe. 
+- Con lo anterior obtenga un resumen de total del importe por organización.
+
+## Abierta
+
+- Si le solicitaran descubrir operaciones _inusuales_ o _sospechosas_, cual sería su forma de detectarlas
+- Entregue 3 operaciones dignas de estudiar
+
+## Fechas
+
+Con la función `ymd_hms` del paquete `lubridate` (carguelo por favor!!) puede _parsear_ (convertir) la columna
+fecha (que es texto!) a fecha-hora. Luego con la función `as.Date` puedes tranformar un campo de fecha-hora a fecha.
+
+Con lo anterior agrupe por dias y obtenga el número de operaciones, como también el importe total 
+por día.
+
+Grafique, de forma separada estas dos variables (por fecha). Que tipo de `geom_` puede ser opción?
+
+## Resumir 2
+
+- Obtenga la suma de los importes por actividad, luego grafìquelos usando `geom_col`.
+- Obtenga la suma de los importes por actividad y hora, luego utilice el `geom_tile` para 
+mostrar la información obtenida. Si gusta vea la ayuda o busque en internet.
