@@ -23,7 +23,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Computación Estadística con R<br>Visualzación de Datos<br><small>Joshua Kunst, 2018</small>{ .center .white data-background="#75AADB" }
+# Computación Estadística con R<br>Visualzación de Datos<br><small>Joshua Kunst</small>{ .center .white data-background="#75AADB" }
 
 ```{r, include = FALSE}
 source("R/setup.R")
@@ -79,7 +79,7 @@ gapminder %>%
   count(continent) %>% 
   ggplot() +
   geom_col(aes(continent, n, fill = continent), width = 0.5) + 
-  scale_fill_viridis(option = "D", discrete = TRUE, guide = FALSE) +
+  scale_fill_viridis_d(discrete = TRUE, guide = FALSE) +
   labs(
     title = "Africa tiene más países que el resto de continentes",
     subtitle = "Un interesante subtitulo para contexto y dar detalles quizás puede ser\nmás largo pero quien soy yo para decir que se debe y lo que no",

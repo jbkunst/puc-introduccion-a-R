@@ -11,41 +11,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="static/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
@@ -486,7 +512,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
     <div class="slides">
 
 
-<section><section id="computacion-estadistica-con-r-facultad-de-matematicas-puc-joshua-kunst-2018" class="titleslide slide level1 center white" data-background="#75AADB"><h1>Computación Estadística con R<br>Facultad de Matemáticas PUC<br><small>Joshua Kunst, 2018</small></h1></section><section id="programa" class="slide level2">
+<section><section id="computacion-estadistica-con-r-facultad-de-matematicas-puc-joshua-kunst" class="title-slide slide level1 center white" data-background="#75AADB"><h1>Computación Estadística con R<br>Facultad de Matemáticas PUC<br><small>Joshua Kunst</small></h1></section><section id="programa" class="slide level2">
 <h2>Programa</h2>
 <ul>
 <li class="fragment">Bienvenida, R, Instalación, Entorno</li>
@@ -512,11 +538,12 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Material</h2>
 <ul>
 <li class="fragment">Primeros pasos de Riva Quiroga: <a href="https://github.com/rivaquiroga/RLadies-Santiago/blob/master/2018-04_taller_primeros_pasos_en_R.Rmd" class="uri">https://github.com/rivaquiroga/RLadies-Santiago/blob/master/2018-04_taller_primeros_pasos_en_R.Rmd</a></li>
-<li class="fragment">R para Ciencia de Datos: <a href="http://r4ds.had.co.nz/" class="uri">http://r4ds.had.co.nz/</a> y <a href="http://es.r4ds.hadley.nz/" class="uri">http://es.r4ds.hadley.nz/</a></li>
+<li class="fragment">R para Ciencia de Datos: <a href="http://es.r4ds.hadley.nz/" class="uri">http://es.r4ds.hadley.nz/</a></li>
+<li class="fragment">Repositorio <a href="https://github.com/jbkunst/puc-introduccion-a-R" class="uri">https://github.com/jbkunst/puc-introduccion-a-R</a></li>
 </ul>
 <p>Revisamos <a href="http://jkunst.com/intro-r-workshop/" class="uri">http://jkunst.com/intro-r-workshop/</a> para motivarlos?</p>
 </section></section>
-<section><section id="instalando-r-y-rstudio" class="titleslide slide level1 center white" data-background="#75AADB"><h1>Instalando R y RStudio</h1></section><section id="descarga-e-instalacion" class="slide level2">
+<section><section id="instalando-r-y-rstudio" class="title-slide slide level1 center white" data-background="#75AADB"><h1>Instalando R y RStudio</h1></section><section id="descarga-e-instalacion" class="slide level2">
 <h2>Descarga e Instalación</h2>
 <ul>
 <li class="fragment">R es el motor</li>
@@ -533,7 +560,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <p>y</p>
 <p><a href="http://es.lmgtfy.com/?q=rstudio+descargar" class="uri">http://es.lmgtfy.com/?q=rstudio+descargar</a></p>
 </section></section>
-<section><section id="usando-r-y-rstudio" class="titleslide slide level1 center white" data-background="#75AADB"><h1>Usando R y RStudio</h1></section><section class="slide level2">
+<section><section id="usando-r-y-rstudio" class="title-slide slide level1 center white" data-background="#75AADB"><h1>Usando R y RStudio</h1></section><section class="slide level2">
 
 <p>Simplemente abrimos RStudio que internamente usará R</p>
 <p><img src="static/img/rstudio.png" alt="Rstudio" width="60%"></p>
@@ -556,16 +583,16 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </ul>
 </section><section class="slide level2">
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">12</span>, <span class="dv">45</span>, <span class="dv">67</span>,<span class="dv">45</span>, <span class="dv">234</span>, <span class="dv">45</span>)
-<span class="kw">mean</span>(x)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">12</span>, <span class="dv">45</span>, <span class="dv">67</span>,<span class="dv">45</span>, <span class="dv">234</span>, <span class="dv">45</span>)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">mean</span>(x)</a></code></pre></div>
 <pre><code>## [1] 74.66667</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(x)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">plot</span>(x)</a></code></pre></div>
 <p><img src="static/img/02/unnamed-chunk-2-1.svg" width="576" /></p>
 </section><section id="tercer-paso---paquetes" class="slide level2">
 <h2>Tercer paso - Paquetes</h2>
 <ul>
 <li class="fragment">Paquetes son conjunto de funciones que extienden la funcionalidad de R</li>
-<li class="fragment">Para poder usarlas debemos antes instalarlas mediante la función <code>install.package</code>. Ejemplo/Ejercicio <code>install.package(&quot;tidyverse&quot;)</code></li>
+<li class="fragment">Para poder usarlas debemos antes instalarlas mediante la función <code>install.package</code>. Ejemplo/Ejercicio <code>install.package("tidyverse")</code></li>
 <li class="fragment">Luego ya instalada, <strong>no siempre</strong> la necesitaré. En caso de necesitarla, la cargo para usarla en nuestra sesión con la función <code>library</code>. Ejemplo/Ejercicio <code>library(readxl)</code></li>
 </ul>
 <p>Resumen. En un computador debemos instalar <strong>una</strong> vez el paquete, y cargar el paquete las veces que los requiramos.</p>

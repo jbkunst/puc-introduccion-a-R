@@ -23,7 +23,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Computación Estadística con R<br>Facultad de Matemáticas PUC<br><small>Joshua Kunst, 2018</small>{ .center .white data-background="#75AADB" }
+# Computación Estadística con R<br>Facultad de Matemáticas PUC<br><small>Joshua Kunst</small>{ .center .white data-background="#75AADB" }
 
 ```{r, include = FALSE}
 source("R/setup.R")
@@ -53,7 +53,8 @@ knitr::opts_chunk$set(fig.path = "static/img/02/")
 ## Material
 
 - Primeros pasos de Riva Quiroga: https://github.com/rivaquiroga/RLadies-Santiago/blob/master/2018-04_taller_primeros_pasos_en_R.Rmd
-- R para Ciencia de Datos: http://r4ds.had.co.nz/ y http://es.r4ds.hadley.nz/
+- R para Ciencia de Datos: http://es.r4ds.hadley.nz/
+- Repositorio https://github.com/jbkunst/puc-introduccion-a-R
 
 Revisamos http://jkunst.com/intro-r-workshop/ para motivarlos?
 
