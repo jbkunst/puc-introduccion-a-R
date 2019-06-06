@@ -1,0 +1,217 @@
+rut,comuna
+207,Las Condes
+84,Isla de Maipo
+44,Isla de Maipo
+197,Maipu
+143,Las Condes
+176,Isla de Maipo
+25,Maipu
+172,Isla de Maipo
+145,Maipu
+158,San Joaquin
+1,Maipu
+50,San Joaquin
+169,Maipu
+136,Isla de Maipo
+138,San Joaquin
+60,Isla de Maipo
+14,San Joaquin
+26,San Joaquin
+88,Isla de Maipo
+199,Las Condes
+205,Maipu
+129,Maipu
+65,Maipu
+38,San Joaquin
+7,Las Condes
+115,Las Condes
+48,Isla de Maipo
+13,Maipu
+31,Las Condes
+179,Las Condes
+148,Isla de Maipo
+89,Maipu
+200,Isla de Maipo
+165,Maipu
+171,Las Condes
+47,Las Condes
+181,Maipu
+96,Isla de Maipo
+111,Las Condes
+173,Maipu
+23,Las Condes
+101,Maipu
+126,San Joaquin
+30,San Joaquin
+195,Las Condes
+192,Isla de Maipo
+18,San Joaquin
+63,Las Condes
+12,Isla de Maipo
+73,Maipu
+161,Maipu
+184,Isla de Maipo
+109,Maipu
+122,San Joaquin
+94,San Joaquin
+123,Las Condes
+201,Maipu
+3,Las Condes
+153,Maipu
+125,Maipu
+16,Isla de Maipo
+170,San Joaquin
+102,San Joaquin
+203,Las Condes
+107,Las Condes
+62,San Joaquin
+90,San Joaquin
+187,Las Condes
+58,San Joaquin
+144,Isla de Maipo
+113,Maipu
+121,Maipu
+104,Isla de Maipo
+55,Las Condes
+95,Las Condes
+5,Maipu
+216,Isla de Maipo
+190,San Joaquin
+52,Isla de Maipo
+43,Las Condes
+194,San Joaquin
+114,San Joaquin
+189,Maipu
+80,Isla de Maipo
+97,Maipu
+11,Las Condes
+212,Isla de Maipo
+163,Las Condes
+156,Isla de Maipo
+132,Isla de Maipo
+202,San Joaquin
+53,Maipu
+37,Maipu
+75,Las Condes
+20,Isla de Maipo
+186,San Joaquin
+185,Maipu
+93,Maipu
+146,San Joaquin
+29,Maipu
+21,Maipu
+105,Maipu
+19,Las Condes
+70,San Joaquin
+209,Maipu
+213,Maipu
+133,Maipu
+33,Maipu
+6,San Joaquin
+208,Isla de Maipo
+42,San Joaquin
+17,Maipu
+137,Maipu
+177,Maipu
+4,Isla de Maipo
+151,Las Condes
+76,Isla de Maipo
+150,San Joaquin
+59,Las Condes
+79,Las Condes
+191,Las Condes
+9,Maipu
+215,Las Condes
+167,Las Condes
+98,San Joaquin
+57,Maipu
+214,San Joaquin
+196,Isla de Maipo
+64,Isla de Maipo
+116,Isla de Maipo
+87,Las Condes
+178,San Joaquin
+168,Isla de Maipo
+112,Isla de Maipo
+127,Las Condes
+99,Las Condes
+24,Isla de Maipo
+85,Maipu
+103,Las Condes
+110,San Joaquin
+124,Isla de Maipo
+51,Las Condes
+69,Maipu
+154,San Joaquin
+139,Las Condes
+100,Isla de Maipo
+141,Maipu
+49,Maipu
+211,Las Condes
+135,Las Condes
+74,San Joaquin
+128,Isla de Maipo
+134,San Joaquin
+118,San Joaquin
+28,Isla de Maipo
+159,Las Condes
+193,Maipu
+149,Maipu
+77,Maipu
+198,San Joaquin
+86,San Joaquin
+210,San Joaquin
+106,San Joaquin
+61,Maipu
+164,Isla de Maipo
+46,San Joaquin
+27,Las Condes
+162,San Joaquin
+157,Maipu
+188,Isla de Maipo
+22,San Joaquin
+36,Isla de Maipo
+82,San Joaquin
+41,Maipu
+182,San Joaquin
+83,Las Condes
+34,San Joaquin
+117,Maipu
+45,Maipu
+108,Isla de Maipo
+183,Las Condes
+39,Las Condes
+71,Las Condes
+152,Isla de Maipo
+66,San Joaquin
+147,Las Condes
+180,Isla de Maipo
+175,Las Condes
+32,Isla de Maipo
+140,Isla de Maipo
+81,Maipu
+155,Las Condes
+15,Las Condes
+2,San Joaquin
+72,Isla de Maipo
+160,Isla de Maipo
+67,Las Condes
+130,San Joaquin
+92,Isla de Maipo
+8,Isla de Maipo
+206,San Joaquin
+131,Las Condes
+68,Isla de Maipo
+78,San Joaquin
+119,Las Condes
+204,Isla de Maipo
+40,Isla de Maipo
+142,San Joaquin
+35,Las Condes
+174,San Joaquin
+166,San Joaquin
+54,San Joaquin
+91,Las Condes
+120,Isla de Maipo
+10,San Joaquin
+56,Isla de Maipo
