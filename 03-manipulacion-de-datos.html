@@ -28,7 +28,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(title);
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -122,7 +122,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
     <style type="text/css">code{white-space: pre;}</style>
 
-    <link rel="stylesheet" href="static\css\styles.css"/>
+    <link rel="stylesheet" href="static/css/styles.css"/>
 
 <!-- Printing and PDF exports -->
 <script id="paper-css" type="application/dynamic-css">
@@ -518,9 +518,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <p>Ir a RStudio. Yay!</p>
 </section><section id="importar-datos" class="slide level2">
 <h2>Importar datos</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb1-2" title="2">storms &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/storms.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb1-3" title="3">storms</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">storms &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/storms.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">storms</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ##   storm    wind pressure date      
 ##   &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;date&gt;    
@@ -532,8 +532,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 6 Arthur     45     1010 1996-06-17</code></pre>
 </section><section class="slide level2">
 
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">pollution &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/pollution.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb3-2" title="2">pollution</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">pollution &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/pollution.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">pollution</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 3
 ##   city     size  amount
 ##   &lt;chr&gt;    &lt;chr&gt;  &lt;dbl&gt;
@@ -552,8 +552,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section><section id="filter-codigo" class="slide level2">
 <h2><code>filter</code> Código</h2>
 <pre><code>filter(storms, storm %in% c(&quot;Alberto&quot;, &quot;Ana&quot;))</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">storms <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="st">  </span><span class="kw">filter</span>(storm <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Alberto&quot;</span>, <span class="st">&quot;Ana&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">storms <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(storm <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Alberto&quot;</span>, <span class="st">&quot;Ana&quot;</span>))</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 4
 ##   storm    wind pressure date      
 ##   &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;date&gt;    
@@ -568,8 +568,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section><section id="select-codigo" class="slide level2">
 <h2><code>select</code> Código</h2>
 <pre><code>select(storms, storm, pressure)</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">storms <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="st">  </span><span class="kw">select</span>(storm, pressure)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">storms <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(storm, pressure)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 2
 ##   storm   pressure
 ##   &lt;chr&gt;      &lt;dbl&gt;
@@ -582,8 +582,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section><section class="slide level2">
 
 <p>Versión alternativa</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">storms <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>wind, <span class="op">-</span>date)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">storms <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>wind, <span class="op">-</span>date)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 2
 ##   storm   pressure
 ##   &lt;chr&gt;      &lt;dbl&gt;
@@ -602,8 +602,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section><section id="arrange-codigo" class="slide level2">
 <h2><code>arrange</code> Código</h2>
 <pre><code>arrange(storms, wind)</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">storms <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="st">  </span><span class="kw">arrange</span>(wind)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">storms <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="st">  </span><span class="kw">arrange</span>(wind)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ##   storm    wind pressure date      
 ##   &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;date&gt;    
@@ -622,8 +622,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section><section id="mutate-codigo" class="slide level2">
 <h2><code>mutate</code> Código</h2>
 <pre><code>mutate(storms, ratio = pressure/wind, inverse = 1/ratio)</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">storms <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb17-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ratio =</span> pressure<span class="op">/</span>wind, <span class="dt">inverse =</span> <span class="dv">1</span><span class="op">/</span>ratio)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">storms <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ratio =</span> pressure<span class="op">/</span>wind, <span class="dt">inverse =</span> <span class="dv">1</span><span class="op">/</span>ratio)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 6
 ##   storm    wind pressure date       ratio inverse
 ##   &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;date&gt;     &lt;dbl&gt;   &lt;dbl&gt;
@@ -642,8 +642,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section><section id="summarise-codigo" class="slide level2">
 <h2><code>summarise</code> Código</h2>
 <pre><code>summarise(pollution, median = median(amount))</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">pollution <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb20-2" title="2"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">median =</span> <span class="kw">median</span>(amount))</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">pollution <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">median =</span> <span class="kw">median</span>(amount))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   median
 ##    &lt;dbl&gt;
@@ -656,13 +656,13 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <p><img data-src="static/img/dplyr/group_by_summarize_example.png" /></p>
 </section><section id="group_by-summarise-codigo" class="slide level2">
 <h2><code>group_by</code> + <code>summarise</code> Código</h2>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">pollution <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb22-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(city) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb22-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(</a>
-<a class="sourceLine" id="cb22-4" title="4">    <span class="dt">promedio =</span> <span class="kw">median</span>(amount),</a>
-<a class="sourceLine" id="cb22-5" title="5">    <span class="dt">suma =</span> <span class="kw">sum</span>(amount),</a>
-<a class="sourceLine" id="cb22-6" title="6">    <span class="dt">n =</span> <span class="kw">n</span>()</a>
-<a class="sourceLine" id="cb22-7" title="7">    )</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">pollution <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(city) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="st">  </span><span class="kw">summarise</span>(</a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">    <span class="dt">promedio =</span> <span class="kw">median</span>(amount),</a>
+<a class="sourceLine" id="cb22-5" data-line-number="5">    <span class="dt">suma =</span> <span class="kw">sum</span>(amount),</a>
+<a class="sourceLine" id="cb22-6" data-line-number="6">    <span class="dt">n =</span> <span class="kw">n</span>()</a>
+<a class="sourceLine" id="cb22-7" data-line-number="7">    )</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ##   city     promedio  suma     n
 ##   &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
@@ -682,8 +682,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section></section>
 <section><section id="manejo-de-datos-2" class="title-slide slide level1 center white" data-background="#75AADB"><h1>Manejo de Datos 2</h1></section><section id="importar-datos-1" class="slide level2">
 <h2>Importar datos</h2>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">songs &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/songs.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb24-2" title="2">songs</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">songs &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/songs.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">songs</a></code></pre></div>
 <pre><code>## # A tibble: 4 x 2
 ##   song                name 
 ##   &lt;chr&gt;               &lt;chr&gt;
@@ -693,8 +693,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 4 Peggy Sue           Buddy</code></pre>
 </section><section class="slide level2">
 
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">artists &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/artists.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb26-2" title="2">artists</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">artists &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/artists.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2">artists</a></code></pre></div>
 <pre><code>## # A tibble: 4 x 2
 ##   name   plays 
 ##   &lt;chr&gt;  &lt;chr&gt; 
@@ -707,7 +707,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <p><img data-src="static/img/dplyr/left_join.png" /></p>
 </section><section id="left_join-codigo" class="slide level2">
 <h2><code>left_join</code> Código</h2>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">left_join</span>(songs, artists, <span class="dt">by =</span> <span class="st">&quot;name&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">left_join</span>(songs, artists, <span class="dt">by =</span> <span class="st">&quot;name&quot;</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 4 x 3
 ##   song                name  plays 
 ##   &lt;chr&gt;               &lt;chr&gt; &lt;chr&gt; 
@@ -717,9 +717,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 4 Peggy Sue           Buddy &lt;NA&gt;</code></pre>
 </section><section id="importar-datos-2" class="slide level2">
 <h2>Importar datos 2</h2>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb30-2" title="2"><span class="kw">data</span>(<span class="st">&quot;table4a&quot;</span>)</a>
-<a class="sourceLine" id="cb30-3" title="3">table4a</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="kw">data</span>(<span class="st">&quot;table4a&quot;</span>)</a>
+<a class="sourceLine" id="cb30-3" data-line-number="3">table4a</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##   country     `1999` `2000`
 ## * &lt;chr&gt;        &lt;int&gt;  &lt;int&gt;
@@ -728,8 +728,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 3 China       212258 213766</code></pre>
 </section><section class="slide level2">
 
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">data</span>(<span class="st">&quot;table2&quot;</span>)</a>
-<a class="sourceLine" id="cb32-2" title="2">table2</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;table2&quot;</span>)</a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">table2</a></code></pre></div>
 <pre><code>## # A tibble: 12 x 4
 ##    country      year type            count
 ##    &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;           &lt;int&gt;
@@ -747,8 +747,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 ## 12 China        2000 population 1280428583</code></pre>
 </section><section class="slide level2">
 
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">cases &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/cases.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb34-2" title="2">cases</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">cases &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/cases.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb34-2" data-line-number="2">cases</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ##   country `2011` `2012` `2013`
 ##   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
@@ -758,8 +758,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <p>¿Como obtendríamos el promedio por país?</p>
 </section><section id="como-obtendriamos-el-promedio-por-pais" class="slide level2">
 <h2>¿Como obtendríamos el promedio por país?</h2>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1">cases <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb36-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">promedio =</span> (<span class="st">`</span><span class="dt">2011</span><span class="st">`</span> <span class="op">+</span><span class="st"> `</span><span class="dt">2012</span><span class="st">`</span> <span class="op">+</span><span class="st"> `</span><span class="dt">2013</span><span class="st">`</span>)<span class="op">/</span><span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">cases <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb36-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">promedio =</span> (<span class="st">`</span><span class="dt">2011</span><span class="st">`</span> <span class="op">+</span><span class="st"> `</span><span class="dt">2012</span><span class="st">`</span> <span class="op">+</span><span class="st"> `</span><span class="dt">2013</span><span class="st">`</span>)<span class="op">/</span><span class="dv">3</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 5
 ##   country `2011` `2012` `2013` promedio
 ##   &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
@@ -776,7 +776,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <p><img data-src="static/img/tidyr/gather_example.png" /></p>
 </section><section id="gather-codigo" class="slide level2">
 <h2><code>gather</code> Código</h2>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">gather</span>(table4a, <span class="st">`</span><span class="dt">1999</span><span class="st">`</span>, <span class="st">`</span><span class="dt">2000</span><span class="st">`</span>, <span class="dt">key =</span> <span class="st">&quot;year&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;cases&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">gather</span>(table4a, <span class="st">`</span><span class="dt">1999</span><span class="st">`</span>, <span class="st">`</span><span class="dt">2000</span><span class="st">`</span>, <span class="dt">key =</span> <span class="st">&quot;year&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;cases&quot;</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 3
 ##   country     year   cases
 ##   &lt;chr&gt;       &lt;chr&gt;  &lt;int&gt;
@@ -795,7 +795,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <p><img data-src="static/img/tidyr/spread_example.png" /></p>
 </section><section id="spread-codigo" class="slide level2">
 <h2><code>spread</code> Código</h2>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">spread</span>(table2, type, count)</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">spread</span>(table2, type, count)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ##   country      year  cases population
 ##   &lt;chr&gt;       &lt;int&gt;  &lt;int&gt;      &lt;int&gt;
