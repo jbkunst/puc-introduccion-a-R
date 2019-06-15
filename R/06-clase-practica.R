@@ -1,11 +1,8 @@
 #' --- 
 #' title: Clase Práctica
 #' output:
-#'   html_document:
-#'     theme: paper
-#'     toc: true
-#'     toc_float: true
-#'     self_contained: true
+#'   pdf_document:
+#'     toc: false
 #' ---
 
 #+ echo = FALSE, message = FALSE, warning = FALSE
