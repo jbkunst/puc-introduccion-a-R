@@ -1,0 +1,73 @@
+---
+title: "Control 1 - Computación Estadística con R"
+author: "Joshua Kunst"
+date: "6 de junio de 2019"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Instrucciones
+
+- Esto se puede resolver con todo el material visto en clases. Pero no es restrictivo en el sentido
+de que puedes usar otros comandos que no hemos visto. 
+- Se puede realizar esta evaluación en grupo de hasta tres (3) personas.
+- Usted(es) debe(n) crear un script en donde se especifique los pasos necesarios (código) y comentarios (#).
+En el caso ideal el script debiese correr  sin problemas al ejecutar los comandos en orden.
+- La fecha límite para enviar la tarea es el jueves 13 de Junio de 2019 hasta las 23:59 hrs. El método
+de envío es via correo electrónico a jbkunst@gmail.com con el asunto "Control 1 - Computación Estadística con R" (copiar y pegar
+por favor).
+- En lo que sigue, compras, operaciones y movimientos se refieren a lo mismo.
+- Referencias que complementan las presentaciones y scripts vistos en clases: 
+  - Tutorial de Riva Quiroga https://github.com/rivaquiroga/RLadies-Santiago/blob/master/primeros_pasos_en_R.md 
+  - Traducción parcial al español de "R for data science" https://es.r4ds.hadley.nz/
+  
+## Los datos
+
+Usando la función `read_tsv` lea un archivo desde la URL https://bit.ly/2ImAOQn, y cree con ello una tabla llamada movimientos.
+
+hint: `movimientos <- read_tsv("https://bit.ly/2ImAOQn")`
+
+## ¿Qué descargamos?
+
+Puedes notar que los datos son referentes a movimientos de las tarjetas de compras de personas en distintos comercios. 
+
+- ¿Cuántos compras hay registradas?
+- ¿Explique como puedes conocer el tipo de las variables (columnas) de estos movimientos?
+
+## Nuevas variables
+
+Asumiendo que el valor promedio de la UF entre el año 2011 y 2019 es $24.000:
+
+- Cree una variable llamada `monto_uf` la cual represente el monto de la opearción/movimiento en UF.
+
+## ¿Máximo o mínimo?
+
+Siempre es bueno conocer los valores límites dentro de nuestros datos. Para ello:
+
+- ¿Que rut corresponde la compra (movimiento, operación) máximo realizada?
+- ¿Cuándo ocurrio dicho importe máximo?
+
+## A fin de cuentas...Compradores compulsivos. 
+
+Para aprender de los datos, generalmente se suele resumir información:
+
+- Obtenga los 10 ruts con más cantidad compras. 
+
+## Geografía 
+
+De la misma forma que la tabla `movimientos`: usando la función `read_csv` lea el contenidode la 
+URL https://bit.ly/2K1mRut, y cree una tabla llamada `comunas`.
+
+hint: `comunas <- read_csv("https://bit.ly/2K1mRut")` 
+
+Con lo anterior:
+
+- ¿Cuál fue la comuna con menor monto en operaciones (o movimientos, compras)?
+
+
+
+
+
