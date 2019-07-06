@@ -4,7 +4,7 @@ library(rpart)
 # source("https://install-github.me/martin-borkovec/ggparty")
 # library(ggparty)
 
-datos <- read_csv("data/ny-sf-home-data.csv.txt")
+datos <- read_csv("https://bit.ly/32eNwK2")
 
 glimpse(datos)
 
@@ -19,8 +19,6 @@ datos1 <- datos %>%
 
 datos2 <- datos %>% 
   filter(row_number() > 250)
-
-
 
 
 # arbol 1 -----------------------------------------------------------------

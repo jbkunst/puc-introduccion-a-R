@@ -52,7 +52,7 @@ knitr::opts_chunk$set(fig.path = "static/img/02/")
 
 ## Material
 
-- Primeros pasos de Riva Quiroga: https://github.com/rivaquiroga/RLadies-Santiago/blob/master/2018-04_taller_primeros_pasos_en_R.Rmd
+- Primeros pasos de Riva Quiroga: https://github.com/rivaquiroga/RLadies-Santiago/blob/master/primeros_pasos_en_R.md
 - R para Ciencia de Datos: http://es.r4ds.hadley.nz/
 - Repositorio https://github.com/jbkunst/puc-introduccion-a-R
 

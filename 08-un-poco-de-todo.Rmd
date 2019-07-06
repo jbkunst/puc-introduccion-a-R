@@ -30,11 +30,31 @@ source("R/setup.R")
 knitr::opts_chunk$set(fig.path = "static/img/08/", echo = FALSE, cache = TRUE)
 ```
 
-# Ha llegado la hora :) :(
+## Ha llegado la hora :) :(
+
+- De seguir 
+- Aprendiendo
+- :D
+
+## No olvidar material!
+
+- Primeros pasos de Riva Quiroga: https://github.com/rivaquiroga/RLadies-Santiago/blob/master/primeros_pasos_en_R.md
+- R para Ciencia de Datos https://es.r4ds.hadley.nz/
+- Ciencia de Datos para Gente Sociable https://bitsandbricks.github.io/ciencia_de_datos_gente_sociable/
+- Repositorio https://github.com/jbkunst/puc-introduccion-a-R
+- http://jkunst.com/puc-introduccion-a-R/
 
 
 ## Árboles, y un poco de machine learning
 
 - http://www.r2d3.us/una-introduccion-visual-al-machine-learning-1/
 - http://www.r2d3.us/visual-intro-to-machine-learning-part-2/
+- Ver script `08-script-arbol.R`
+
+## Rmarkdown
+
+- https://rmarkdown.rstudio.com/
+- https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-spanish.pdf
+
+ 
 
