@@ -1,0 +1,40 @@
+---
+title: false
+pagetitle: 'Computación estadística con R'
+author: false
+output:
+  revealjs::revealjs_presentation:
+    lib_dir: static
+    self_contained: false
+    reveal_plugins: ["zoom"]
+    mathjax: null
+    transition: fade
+    css: ["static/css/styles.css"]
+    incremental: true
+    center: false
+    theme: simple
+    fig_width: 6
+    fig_height: 3.5
+    reveal_options:
+      slideNumber: false
+      controls: false
+      mouseWheel: false
+editor_options: 
+  chunk_output_type: console
+---
+
+# Computación Estadística con R<br>Un poco de todo<br><small>Joshua Kunst</small>{ .center .white data-background="#75AADB" }
+
+```{r, include = FALSE}
+source("R/setup.R")
+knitr::opts_chunk$set(fig.path = "static/img/08/", echo = FALSE, cache = TRUE)
+```
+
+# Ha llegado la hora :) :(
+
+
+## Árboles, y un poco de machine learning
+
+- http://www.r2d3.us/una-introduccion-visual-al-machine-learning-1/
+- http://www.r2d3.us/visual-intro-to-machine-learning-part-2/
+

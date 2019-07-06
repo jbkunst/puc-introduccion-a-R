@@ -16,8 +16,9 @@ knitr::opts_chunk$set(
 # Introducción a R
 
 - [Intro a R](http://jkunst.com/intro-r-workshop/)
-- [Bienvenida :)](http://jkunst.com/puc-introduccion-a-R/01-bienvenida-r-rstudio.html)
-- [Importación de tablas](http://jkunst.com/puc-introduccion-a-R/02-importacion-de-datos.html)
-- [Manipulación de datos](http://jkunst.com/puc-introduccion-a-R/03-manipulacion-de-datos.html)
-- [Visualización](http://jkunst.com/puc-introduccion-a-R/04-visualizacion-de-datos.html)
-
+- [Bienvenida :)](01-bienvenida-r-rstudio.html)
+- [Importación de tablas](02-importacion-de-datos.html)
+- [Manipulación de datos](03-manipulacion-de-datos.html)
+- [Visualización](04-visualizacion-de-datos.html)
+- [Introducción a Estadística](07-intro-estadistica.html)
+- [Un poco de todo](08-un-poco-de-todo.html)

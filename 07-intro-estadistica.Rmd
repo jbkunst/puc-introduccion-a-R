@@ -23,7 +23,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Computación Estadística con R<br>Introducción a la Estadística<br><small>Joshua Kunst, 2018</small>{ .center .white data-background="#75AADB" }
+# Computación Estadística con R<br>Introducción a la Estadística<br><small>Joshua Kunst</small>{ .center .white data-background="#75AADB" }
 
 ```{r, include = FALSE}
 source("R/setup.R")

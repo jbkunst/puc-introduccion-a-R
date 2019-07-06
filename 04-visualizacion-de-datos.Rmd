@@ -79,7 +79,7 @@ gapminder %>%
   count(continent) %>% 
   ggplot() +
   geom_col(aes(continent, n, fill = continent), width = 0.5) + 
-  scale_fill_viridis_d(discrete = TRUE, guide = FALSE) +
+  scale_fill_viridis_d(guide = FALSE) +
   labs(
     title = "Africa tiene más países que el resto de continentes",
     subtitle = "Un interesante subtitulo para contexto y dar detalles quizás puede ser\nmás largo pero quien soy yo para decir que se debe y lo que no",
@@ -112,7 +112,7 @@ gapminder %>%
 data(legosets , package = "lego")
 ggplot(legosets) + 
   geom_point(aes(Pieces, USD_MSRP, size = Minifigures, color = Year), alpha = 0.7) +
-  scale_color_viridis(option = "A") + 
+  scale_color_viridis_c(option = "A") + 
   scale_y_sqrt(name = "Precio USD", labels = dollar, limits = c(0, 300)) +
   scale_x_sqrt(name = "Piezas", labels = comma, limits = c(0, 2000)) +
   labs(title = "Precios según piezas")
@@ -126,7 +126,7 @@ legosets %>%
   select(year2, Year, everything()) %>% 
   ggplot() +
   geom_jitter(aes(factor(year2), USD_MSRP, size = Pieces, color = Year), alpha = 0.5, width = 0.25) +
-  scale_color_viridis(option = "A") + 
+  scale_color_viridis_c(option = "A") + 
   scale_y_continuous(name = "Precio USD", labels = dollar, limits = c(0, 300)) + 
   scale_x_discrete(name = "Década") +
   labs(title = "Precios/Década")
@@ -134,7 +134,7 @@ legosets %>%
 
 ----
 
-```{r}
+```{r, eval=FALSE, results='hide'}
 # install.packages(c("rgexf", "ggnetwork", "intergraph"))
 # 316
 library(tidyverse)
@@ -296,13 +296,13 @@ legos2 <- legosets %>%
   
 p1 <- ggplot(legos2) +
   geom_bar(aes(Theme, fill = Theme)) +
-  scale_fill_viridis(discrete = TRUE, option = "B", end = 0.7) +
+  scale_fill_viridis_d(option = "B", end = 0.7) +
   theme_null() + 
   xlab(NULL) + ylab(NULL)
 
 p2 <- ggplot(legos2) +
   geom_bar(aes(x = factor(1), fill = Theme), width = 1) +
-  scale_fill_viridis(discrete = TRUE, option = "B", end = 0.7) +
+  scale_fill_viridis_d(option = "B", end = 0.7) +
   coord_polar(theta = "y") +
   theme_null()
 
@@ -320,13 +320,13 @@ legos3 <- legosets %>%
 
 p1 <- ggplot(legos3) +
   geom_bar(aes(Theme, fill = Theme)) +
-  scale_fill_viridis(discrete = TRUE, option = "B") +
+  scale_fill_viridis_d(option = "B") +
   theme_null() + 
   xlab(NULL) + ylab(NULL)
 
 p2 <- ggplot(legos3) +
   geom_bar(aes(x = factor(1), fill = Theme), width = 1) +
-  scale_fill_viridis(discrete = TRUE, option = "B") +
+  scale_fill_viridis_d(option = "B") +
   coord_polar(theta = "y") +
   theme_null()
 
@@ -446,7 +446,7 @@ ggplot(df) +
 ```{r}
 ggplot(legosets) + 
   geom_point(aes(Pieces, USD_MSRP, size = Minifigures, color = Year), alpha = 0.7) +
-  scale_color_viridis(option = "A") + 
+  scale_color_viridis_c(option = "A") + 
   scale_y_sqrt(name = "Precio USD", labels = dollar, limits = c(0, 300)) +
   scale_x_sqrt(name = "Piezas", labels = comma, limits = c(0, 2000)) +
   labs(title = "Precios según piezas")

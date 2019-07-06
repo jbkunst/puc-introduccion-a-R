@@ -11,41 +11,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="static/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
@@ -486,7 +512,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
     <div class="slides">
 
 
-<section><section id="computacion-estadistica-con-r-visualzacion-de-datos-joshua-kunst-2018" class="titleslide slide level1 center white" data-background="#75AADB"><h1>Computación Estadística con R<br>Visualzación de Datos<br><small>Joshua Kunst, 2018</small></h1></section><section id="estructura" class="slide level2">
+<section><section id="computacion-estadistica-con-r-visualzacion-de-datos-joshua-kunst" class="title-slide slide level1 center white" data-background="#75AADB"><h1>Computación Estadística con R<br>Visualzación de Datos<br><small>Joshua Kunst</small></h1></section><section id="estructura" class="slide level2">
 <h2>Estructura</h2>
 <ul>
 <li class="fragment">¿Por que?</li>
@@ -496,10 +522,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </ul>
 </section><section id="por-que-visualizacion" class="slide level2">
 <h2>¿Por que visualización?</h2>
-<p><img src="http://img.kiosko.net/2017/07/18/uk/ft_uk.750.jpg" /></p>
+<p><img data-src="http://img.kiosko.net/2017/07/18/uk/ft_uk.750.jpg" /></p>
 </section><section class="slide level2">
 
-<p><img src="https://pbs.twimg.com/media/DSNbnLrXkAAibaB.jpg" /></p>
+<p><img data-src="https://pbs.twimg.com/media/DSNbnLrXkAAibaB.jpg" /></p>
 <!-- https://twitter.com/sdbernard/status/946701218298126341  -->
 </section><section id="definicion-tecnica-posible" class="slide level2">
 <h2>Definición técnica (Posible)</h2>
@@ -508,7 +534,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section><section class="slide level2">
 
 <p>Muchos sabores:</p>
-<p><img src="static/img/charts.gif" /></p>
+<p><img data-src="static/img/charts.gif" /></p>
 </section><section class="slide level2">
 
 <p>Cosas importantes sobre visualización de datos:</p>
@@ -531,9 +557,6 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section><section class="slide level2">
 
 <p><img src="static/img/04/unnamed-chunk-5-1.svg" width="960" /></p>
-</section><section class="slide level2">
-
-<p><img src="static/img/04/unnamed-chunk-6-1.svg" width="960" /></p>
 </section><section id="ejercicio" class="slide level2">
 <h2>Ejercicio</h2>
 <p>¿Existe el mejor gráfico? ¿Cuál de las siguientes formas funciona mejor con el títutlo?</p>
@@ -601,9 +624,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section><section class="slide level2">
 
 <p>(Posible) Respuesta</p>
-<p><strong>No. Dependerá de tu mensaje, de tu historia.</strong></p>
+<p><strong>No. Dependerá de tu mensaje, de tu historia.</strong></p>
 </section></section>
-<section><section id="recomendaciones-tecnicas-y-algunas-miscelaneas" class="titleslide slide level1 center white" data-background="#75AADB"><h1>Recomendaciones Técnicas <br> y algunas Misceláneas</h1></section><section id="pie-charts-o-tortas" class="slide level2">
+<section><section id="recomendaciones-tecnicas-y-algunas-miscelaneas" class="title-slide slide level1 center white" data-background="#75AADB"><h1>Recomendaciones Técnicas <br> y algunas Misceláneas</h1></section><section id="pie-charts-o-tortas" class="slide level2">
 <h2>Pie Charts (o tortas)</h2>
 <!-- https://twitter.com/MetricsHulk/status/728014668913102848 -->
 <p><img src="https://pbs.twimg.com/media/Chpte5BVEAA-ppy.jpg" width="80%"/></p>
@@ -629,10 +652,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Puntos de Referencia</h2>
 </section><section class="slide level2">
 
-<p><br> <img src="static/img/pinera.jpg" /></p>
+<p><br> <img data-src="static/img/pinera.jpg" /></p>
 </section><section class="slide level2">
 
-<p><br> <img src="static/img/pinera2.jpg" /></p>
+<p><br> <img data-src="static/img/pinera2.jpg" /></p>
 </section><section class="slide level2">
 
 <p><img src="static/img/04/unnamed-chunk-14-1.svg" width="960" /></p>
@@ -663,7 +686,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <p></span></p>
 </section><section class="slide level2">
 
-<p><img src="static/img/comicsanscriminal.png" /></p>
+<p><img data-src="static/img/comicsanscriminal.png" /></p>
 </section><section class="slide level2">
 
 <p>Según <font face="Comic Sans MS"><a href="http://www.comicsanscriminal.com/">comic sans criminal</a></font>:</p>
@@ -709,7 +732,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 
 <p><img src="static/img/04/unnamed-chunk-22-1.svg" width="960" /></p>
 </section></section>
-<section><section id="visualizando-con-ggplot2" class="titleslide slide level1 center white" data-background="#75AADB"><h1>Visualizando con ggplot2</h1></section><section id="ggplot2" class="slide level2">
+<section><section id="visualizando-con-ggplot2" class="title-slide slide level1 center white" data-background="#75AADB"><h1>Visualizando con ggplot2</h1></section><section id="ggplot2" class="slide level2">
 <h2>ggplot2</h2>
 <p>Características:</p>
 <ul>
@@ -720,11 +743,11 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </ul>
 </section><section id="datos" class="slide level2">
 <h2>Datos</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gapminder)
-<span class="kw">data</span>(gapminder)
-paises &lt;-<span class="st"> </span>gapminder <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(year))
-paises</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(gapminder)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">data</span>(gapminder)</a>
+<a class="sourceLine" id="cb1-3" title="3">paises &lt;-<span class="st"> </span>gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(year))</a>
+<a class="sourceLine" id="cb1-5" title="5">paises</a></code></pre></div>
 <pre><code>## # A tibble: 142 x 6
 ##    country     continent  year lifeExp       pop gdpPercap
 ##    &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
@@ -741,17 +764,17 @@ paises</code></pre></div>
 ## # ... with 132 more rows</code></pre>
 </section><section id="creando-un-grafico" class="slide level2">
 <h2>Creando un gráfico :)</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises)</a></code></pre></div>
 <p><img src="static/img/04/unnamed-chunk-25-1.svg" width="960" /></p>
 </section><section id="mejorando-un-grafico" class="slide level2">
 <h2>Mejorando un gráfico</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap))</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap))</a></code></pre></div>
 <p><img src="static/img/04/unnamed-chunk-26-1.svg" width="960" /></p>
 </section><section id="que-sucedio" class="slide level2">
 <h2>Que sucedió?</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap))</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap))</a></code></pre></div>
 <p><small></p>
 <ul>
 <li class="fragment"><code>ggplot()</code> crea un sistema de coordenadas al cual se pueden agregar capas</li>
@@ -764,27 +787,27 @@ paises</code></pre></div>
 </section><section class="slide level2">
 
 <p>Podemos setear las propiedades estéticas de tu geom manualmente:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap), <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap), <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
 <p><img src="static/img/04/unnamed-chunk-27-1.svg" width="960" /></p>
 </section><section class="slide level2">
 
 <p>En este caso un punto no solo puede poseer x e y, puede tener tamaño dado por una variable</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap, <span class="dt">size =</span> pop), <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap, <span class="dt">size =</span> pop), <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
 <p><img src="static/img/04/unnamed-chunk-28-1.svg" width="960" /></p>
 </section><section class="slide level2">
 
 <p>Quizás en lugar de setar color fijo, podemos asignarlo segun una variable</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap, <span class="dt">size =</span> pop, <span class="dt">color =</span> continent))</code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap, <span class="dt">size =</span> pop, <span class="dt">color =</span> continent))</a></code></pre></div>
 <p><img src="static/img/04/unnamed-chunk-29-1.svg" width="960" /></p>
 </section><section class="slide level2">
 
 <p>O realizar <em>facets</em>/paneles</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap, <span class="dt">size =</span> pop)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(continent))</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> paises) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> lifeExp, <span class="dt">y =</span> gdpPercap, <span class="dt">size =</span> pop)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="kw">vars</span>(continent))</a></code></pre></div>
 <p><img src="static/img/04/unnamed-chunk-30-1.svg" width="960" /></p>
 </section><section id="ejercicios" class="slide level2">
 <h2>Ejercicios</h2>
