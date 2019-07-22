@@ -49,10 +49,10 @@ clientes <- clientes %>%
 clientes %>% 
   count(malo_en_los_12m)
 
-set.seed(123)
-clientes <- clientes %>% 
-  group_by(malo_en_los_12m) %>% 
-  sample_n(8000)
+# set.seed(123)
+# clientes <- clientes %>% 
+#   group_by(malo_en_los_12m) %>% 
+#   sample_n(8000)
 
 clientes %>% 
   group_by(cantidad_tarjetas_credito) %>% 

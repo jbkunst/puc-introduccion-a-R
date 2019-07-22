@@ -118,7 +118,7 @@ clientes <- clientes %>%
     malo_en_los_12m = factor(malo_en_los_12m)
     )
 
-arbol <- ctree(malo_en_los_12m ~ ., data = clientes, control = ctree_control(maxdepth = 3))
+arbol <- ctree(malo_en_los_12m ~ ., data = clientes, control = ctree_control(maxdepth = 5))
 ```
 
 - Comente acerca de que variables fueron las más importantes/relevantes.
@@ -145,6 +145,9 @@ predict(arbol, clientes_nuevos, type = "prob")
 ```
 
 
+```{r, include=FALSE}
+plot(arbol)
+```
 
 
 
