@@ -27,7 +27,7 @@ por favor).
   
 ## Los datos
 
-Usando la función `read_csv lea un archivo desde la URL `https://raw.githubusercontent.com/jbkunst/puc-introduccion-a-R/master/data/clientes.csv`, y cree con ello una tabla llamada `clientes`.
+Usando la función `read_csv` lea un archivo desde la URL `https://raw.githubusercontent.com/jbkunst/puc-introduccion-a-R/master/data/clientes.csv`, y cree con ello una tabla llamada `clientes`.
 
 hint:
 
@@ -51,15 +51,14 @@ alcanzó una mora mayor a 90, es decir: malo :(
 
 ## Caracterizando a los clientes
 
-- Obtenga la distribución de mujeres y hombres en las ventas, es decir cuantos créditos de consumo
-fueron vendidos a mujeres y cuantos a hombres.
+- ¿Cuantos clientes tienen 0 tarjetas de credito al momento del otorgamiento/venta?
 
 - ¿Cual fue la proporción (número entre 0 y 1, porcentaje) de clientes que en los 12 meses posteriores
 a la venta que fueron _malos_?
 
 - Genere un histograma de la variable ingreso y comente
 
-- Estudie si existe diferencia del ingreso según género y comente.
+- Estudie (pregunta abierta) si existe diferencia del ingreso según género y comente.
 
 ## Agregando más datos
 
@@ -95,6 +94,8 @@ clientes_edad %>%
 - Ahora, nos mencionan que se requiere observar las edades usando una categorización de 20 en 20. 
 Use el código anterior para obtener lo requerido.
 
+- ¿Cuantos clientes son/fueron menores de edad (21 años)?
+
 
 ## Juntando los datos
 
@@ -108,14 +109,14 @@ si hace sentido o no el resultado obtenido.
 
 - Con los datos consolidados obtenga un árbol de decisión y dibújelo (`plot`). Para esto debe primero
 cargar el paquete `parykiy` y remitirse al archivo `08-script-arbol.R`. Suponiendo
-que los datos consolidados (con edad) se llaman `clientes` use lo siguiente:
+que los datos consolidados (con edad) se llama `clientes` use lo siguiente:
 
 ```{r, include=FALSE}
 clientes <- left_join(clientes, clientes_edad, by = "rut_cliente")
 ```
 
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(partykit)
 
 clientes <- clientes %>% 
@@ -126,7 +127,8 @@ clientes <- clientes %>%
 arbol <- ctree(malo_en_los_12m ~ ., data = clientes, control = ctree_control(maxdepth = 3))
 ```
 
-- Comente acerca de que variables fueron las más importantes/relevantes.
+- Comente acerca de que variables fueron las más importantes/relevantes para determinar el _riesgo_
+de una venta.
 
 - Comente que perfiles de clientes son más propensos a ser _malos_ en los 12 meses siguientes a
 la obtención de un crédito de consumo, de la misma forma los clientes menos propensos.
@@ -134,7 +136,7 @@ la obtención de un crédito de consumo, de la misma forma los clientes menos pr
 - Recuerde que el árbol se obtuvo (se entrenó) con datos del pasado ahora supongo que en el día 
 de hoy se entregaron 5 créditos de consumo los cuales se pueden obtener con el siguiente código:
 
-```{r, eval=TRUE}
+```{r, eval=TRUE, message=FALSE}
 clientes_nuevos <- read_csv("https://raw.githubusercontent.com/jbkunst/puc-introduccion-a-R/master/data/clientes-nuevos.csv")
 ```
 
@@ -142,7 +144,7 @@ clientes_nuevos <- read_csv("https://raw.githubusercontent.com/jbkunst/puc-intro
 clientes_nuevos
 ```
 
-Ahora usando él siguiente código, que entrega la probabilidad de que sea o no malo en los próximos siguientes
+Ahora usando el siguiente código, que entrega la probabilidad de que sea o no malo en los próximos siguientes
 12 meses, indique cual es el cliente más propenso a serlo y por comenté la razón de eso: 
 
 ```
