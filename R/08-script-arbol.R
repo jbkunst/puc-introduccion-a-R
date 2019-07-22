@@ -23,11 +23,43 @@ datos2 <- datos %>%
 
 # arbol 1 -----------------------------------------------------------------
 # https://stats.stackexchange.com/questions/12140/conditional-inference-trees-vs-traditional-decision-trees
-arbol1 <- ctree(in_sf ~ ., data = datos1, control = ctree_control())
+arbol1 <- ctree(in_sf ~ .,
+                data = datos1,
+                control = ctree_control())
 
 plot(arbol1)
 
+arbol1
+
 predict(arbol1, type = "response")
+
+predict(arbol1, newdata = datos2, type = "prob")
+
+predict(arbol1, newdata = datos2, type = "response")
+
+predict(arbol1, newdata = datos2, type = "node")
+
+datos2 <- datos2 %>% 
+  mutate(
+    pred = predict(arbol1, newdata = datos2, type = "response"),
+    nodo = predict(arbol1, newdata = datos2, type = "node")
+    )
+
+glimpse(datos2)
+
+# como valido? 
+# matriz de confusi?n
+datos2_validacion <- datos2 %>% 
+  count(in_sf, pred) %>% 
+  mutate(p = n/sum(n))
+
+datos2_validacion
+
+saveRDS(arbol1, "data/mimodelo.rds")
+
+# como se una un arbol en el futuro ---------------------------------------
+
+
 
 
 # arbol 2 -----------------------------------------------------------------
