@@ -1,0 +1,164 @@
+---
+title: "Control 2 - Computación Estadística con R"
+author: "Joshua Kunst"
+date: "22 de julio de 2019"
+output: word_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Instrucciones
+
+- Esto se puede resolver con todo el material visto en clases. Pero no es restrictivo en el sentido
+de que puedes usar otros comandos que no hemos visto. 
+- Se puede realizar esta evaluación en grupo de hasta tres (3) personas.
+- Usted(es) debe(n) crear un script en donde se especifique los pasos necesarios (código) y comentarios (#).
+En el caso ideal el script debiese correr  sin problemas al ejecutar los comandos en orden.
+- La fecha límite para enviar la tarea es el jueves 31 de Julio de 2019 hasta las 23:59 hrs. El método
+de envío es via correo electrónico a jbkunst@gmail.com con el asunto "Control 2 - Computación Estadística con R" (copiar y pegar
+por favor).
+- Referencias que complementan las presentaciones y scripts vistos en clases: 
+  - Tutorial de Riva Quiroga https://github.com/rivaquiroga/RLadies-Santiago/blob/master/primeros_pasos_en_R.md 
+  - Traducción parcial al español de "R for data science" https://es.r4ds.hadley.nz/
+  
+## Los datos
+
+Usando la función `read_csv lea un archivo desde la URL `https://raw.githubusercontent.com/jbkunst/puc-introduccion-a-R/master/data/clientes.csv`, y cree con ello una tabla llamada `clientes`.
+
+hint:
+
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
+library(tidyverse)
+
+clientes <- read_csv("https://raw.githubusercontent.com/jbkunst/puc-introduccion-a-R/master/data/clientes.csv")
+```
+
+```{r, include=FALSE}
+library(tidyverse)
+clientes <- read_csv("data/clientes.csv")
+```
+
+
+Estos datos corresponden a ventas en cierto banco. Los datos de los clientes 
+corresponden a la información al momento de la entrega del producto financiero (digamos crédito de consumo), 
+y la variable `malo_en_los_12m` fue un registro a posterior indicado si el cliente en el producto vendido 
+alcanzó una mora mayor a 90, es decir: malo :( 
+
+## Explorando:
+
+- ¿Cuántas filas y cuantas columnas contienes los datos?
+- Indique como puede conocer los tipos de cada columna
+
+## Caracterizando a los clientes
+
+- Obtenga la distribución de mujeres y hombres en las ventas, es decir cuantos créditos de consumo
+fueron vendidos a mujeres y cuantos a hombres.
+
+- ¿Cual fue la proporción (número entre 0 y 1, porcentaje) de clientes que en los 12 meses posteriores
+a la venta que fueron _malos_?
+
+- Genere un histograma de la variable ingreso y comente
+
+- Estudie si existe diferencia del ingreso según género y comente.
+
+## Agregando más datos
+
+Nos dicen que la edad puede ser relevante para conocer mejor a nuestros clientes. La información
+está en otra tabla la cual se puede leer de la siguiente manera:
+
+```{r, eval=FALSE}
+clientes_edad <- read_csv("https://raw.githubusercontent.com/jbkunst/puc-introduccion-a-R/master/data/clientes-edad.csv")
+```
+
+```{r, include=FALSE}
+clientes_edad <- read_csv("data/clientes-edad.csv")
+```
+
+```{r}
+clientes_edad
+```
+
+- El siguiente código obtiene la distribución de las ventas segun ciertos cortes de edad:
+
+
+```{r}
+clientes_edad <- clientes_edad %>% 
+  # CREAR (o modificar) variable
+  mutate(
+    edad_categorizada = cut(edad, breaks = c(0, 40, 50, 60, 100))
+  )
+
+clientes_edad
+
+clientes_edad %>% 
+  count(edad_categorizada)
+```
+
+¿Qué puede comentar/criticar respecto a los grupos generados?
+
+- Ahora, nos mencionan que se requiere observar las edades usando una categorización de 20 en 20. 
+Use el código anterior para obtener lo requerido.
+
+
+## Juntando los datos
+
+- Consolide la información en una sola tabla.
+
+- Con los grupos de la pregunta del punto anterior calcule el ingreso promedio para cada grupo. Comente
+si hace sentido o no el resultado obtenido.
+
+
+## Árbol de decisión
+
+- Con los datos consolidados obtenga un árbol de decisión y dibújelo (`plot`). Para esto debe primero
+cargar el paquete `parykiy` y remitirse al archivo `08-script-arbol.R`. Suponiendo
+que los datos consolidados (con edad) se llaman `clientes` use lo siguiente:
+
+```{r}
+library(partykit)
+
+clientes <- clientes %>% 
+  mutate(
+    malo_en_los_12m = factor(malo_en_los_12m)
+    )
+
+arbol <- ctree(malo_en_los_12m ~ ., data = clientes, control = ctree_control(maxdepth = 4))
+```
+
+- Comente acerca de que variables fueron las más importantes/relevantes.
+
+- Comente que perfiles de clientes son más propensos a ser _malos_ en los 12 meses siguientes a
+la obtención de un crédito de consumo.
+
+- Recuerde que el árbol se obtuvo (se entrenó) con datos del pasado ahora supongo que en el día 
+de hoy se entregaron 5 créditos de consumo los cuales se pueden obtener con el siguiente código:
+
+```{r, eval=FALSE}
+clientes_nuevos <- read_csv("https://raw.githubusercontent.com/jbkunst/puc-introduccion-a-R/master/data/clientes-nuevos.csv")
+```
+
+
+
+```{r, include=FALSE}
+clientes_nuevos <- read_csv("data/clientes-nuevos.csv")
+```
+
+```{r}
+clientes_nuevos
+```
+
+Ahora usando él siguiente código, que entrega la probabilidad de que sea o no malo en los próximos siguientes
+12 meses, indique cual es el cliente más propenso a serlo y por comenté la razón de eso: 
+
+```
+predict(arbol, clientes_nuevos, type = "prob")
+```
+
+
+
+
+
