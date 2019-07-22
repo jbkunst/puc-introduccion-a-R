@@ -31,16 +31,12 @@ Usando la función `read_csv lea un archivo desde la URL `https://raw.githubuser
 
 hint:
 
-```{r, message=FALSE, warning=FALSE, eval=FALSE}
+```{r, message=FALSE, warning=FALSE, eval=TRUE}
 library(tidyverse)
 
 clientes <- read_csv("https://raw.githubusercontent.com/jbkunst/puc-introduccion-a-R/master/data/clientes.csv")
 ```
 
-```{r, include=FALSE}
-library(tidyverse)
-clientes <- read_csv("data/clientes.csv")
-```
 
 
 Estos datos corresponden a ventas en cierto banco. Los datos de los clientes 
@@ -70,12 +66,8 @@ a la venta que fueron _malos_?
 Nos dicen que la edad puede ser relevante para conocer mejor a nuestros clientes. La información
 está en otra tabla la cual se puede leer de la siguiente manera:
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 clientes_edad <- read_csv("https://raw.githubusercontent.com/jbkunst/puc-introduccion-a-R/master/data/clientes-edad.csv")
-```
-
-```{r, include=FALSE}
-clientes_edad <- read_csv("data/clientes-edad.csv")
 ```
 
 ```{r}
@@ -126,7 +118,7 @@ clientes <- clientes %>%
     malo_en_los_12m = factor(malo_en_los_12m)
     )
 
-arbol <- ctree(malo_en_los_12m ~ ., data = clientes, control = ctree_control(maxdepth = 4))
+arbol <- ctree(malo_en_los_12m ~ ., data = clientes, control = ctree_control(maxdepth = 3))
 ```
 
 - Comente acerca de que variables fueron las más importantes/relevantes.
@@ -137,14 +129,8 @@ la obtención de un crédito de consumo.
 - Recuerde que el árbol se obtuvo (se entrenó) con datos del pasado ahora supongo que en el día 
 de hoy se entregaron 5 créditos de consumo los cuales se pueden obtener con el siguiente código:
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 clientes_nuevos <- read_csv("https://raw.githubusercontent.com/jbkunst/puc-introduccion-a-R/master/data/clientes-nuevos.csv")
-```
-
-
-
-```{r, include=FALSE}
-clientes_nuevos <- read_csv("data/clientes-nuevos.csv")
 ```
 
 ```{r}

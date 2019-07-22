@@ -5,7 +5,9 @@ clientes_ori <- read_csv("https://raw.githubusercontent.com/jbkunst/riskr/master
 
 glimpse(clientes_ori)
 
-clientes_ori <- mutate_if(clientes_ori, is.character, as.factor)
+# clientes_ori <- mutate_if(clientes_ori, is.character, as.factor)
+
+count(clientes_ori, bad)
 
 # partykit::ctree(bad ~ ., data = clientes_ori, control = partykit::ctree_control(maxdepth = 4)) %>% 
 #   plot()
@@ -45,6 +47,14 @@ clientes <- clientes %>%
     meses_en_su_actual_trabajo <= quantile(meses_en_su_actual_trabajo   , .95)) 
 
 clientes %>% 
+  count(malo_en_los_12m)
+
+set.seed(123)
+clientes <- clientes %>% 
+  group_by(malo_en_los_12m) %>% 
+  sample_n(8000)
+
+clientes %>% 
   group_by(cantidad_tarjetas_credito) %>% 
   summarise(
     n = n(),
@@ -60,7 +70,7 @@ set.seed(123)
 write_csv(clientes %>% sample_n(5), "data/clientes-nuevos.csv")
 
 
-tree <- partykit::ctree(malo_en_los_12m ~ ., data = clientes)
+tree <- partykit::ctree(factor(malo_en_los_12m) ~ ., data = clientes)
 plot(tree)
 
 predict(tree, clientes_nuevos)
