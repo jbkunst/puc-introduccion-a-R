@@ -67,11 +67,18 @@ set.seed(123)
 write_csv(clientes %>% select(rut_cliente, edad) %>% sample_frac(1), "data/clientes-edad.csv")
 
 set.seed(123)
-write_csv(clientes %>% sample_n(5), "data/clientes-nuevos.csv")
+
+clientes %>% 
+  mutate(aux = ggplot2::cut_number(edad, 5)) %>% 
+  group_by(aux) %>% 
+  sample_n(1) %>% 
+  select(-aux) %>% 
+  write_csv("data/clientes-nuevos.csv")
 
 
 tree <- partykit::ctree(factor(malo_en_los_12m) ~ ., data = clientes)
 plot(tree)
 
 predict(tree, clientes_nuevos)
-
+predict(tree, clientes_nuevos, type = "prob")
+predict(tree, clientes_nuevos, type = "node")

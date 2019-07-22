@@ -110,6 +110,11 @@ si hace sentido o no el resultado obtenido.
 cargar el paquete `parykiy` y remitirse al archivo `08-script-arbol.R`. Suponiendo
 que los datos consolidados (con edad) se llaman `clientes` use lo siguiente:
 
+```{r, include=FALSE}
+clientes <- left_join(clientes, clientes_edad, by = "rut_cliente")
+```
+
+
 ```{r}
 library(partykit)
 
@@ -118,13 +123,13 @@ clientes <- clientes %>%
     malo_en_los_12m = factor(malo_en_los_12m)
     )
 
-arbol <- ctree(malo_en_los_12m ~ ., data = clientes, control = ctree_control(maxdepth = 5))
+arbol <- ctree(malo_en_los_12m ~ ., data = clientes, control = ctree_control(maxdepth = 3))
 ```
 
 - Comente acerca de que variables fueron las más importantes/relevantes.
 
 - Comente que perfiles de clientes son más propensos a ser _malos_ en los 12 meses siguientes a
-la obtención de un crédito de consumo.
+la obtención de un crédito de consumo, de la misma forma los clientes menos propensos.
 
 - Recuerde que el árbol se obtuvo (se entrenó) con datos del pasado ahora supongo que en el día 
 de hoy se entregaron 5 créditos de consumo los cuales se pueden obtener con el siguiente código:
@@ -141,7 +146,7 @@ Ahora usando él siguiente código, que entrega la probabilidad de que sea o no 
 12 meses, indique cual es el cliente más propenso a serlo y por comenté la razón de eso: 
 
 ```
-predict(arbol, clientes_nuevos, type = "prob")
+predict(arbol, clientes_nuevos, type = "node")
 ```
 
 

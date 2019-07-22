@@ -1,6 +1,6 @@
-rut_cliente,malo_en_los_12m,cantidad_tarjetas_credito,ingreso,edad,meses_en_su_actual_trabajo
-18946000,1,0,1050000,42,12
-25824500,0,0,330000,25,24
-1849500,1,0,735000,36,12
-3741500,0,0,1500000,29,72
-9663500,0,0,271500,37,24
+aux,rut_cliente,malo_en_los_12m,cantidad_tarjetas_credito,ingreso,edad,meses_en_su_actual_trabajo
+"[19,22]",18984000,1,0,418500,22,36
+"(22,28]",25836500,0,0,525000,24,12
+"(28,34]",2542500,0,0,463500,30,12
+"(34,42]",6973000,0,0,1320000,36,24
+"(42,59]",8015500,0,0,324000,45,24
